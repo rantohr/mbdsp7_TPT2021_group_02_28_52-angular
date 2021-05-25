@@ -1,0 +1,62 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic,900,900italic,100italic,100);
+
+body {
+  font-family: "Roboto";
+  font-size: 15px;
+  padding: 20px;
+}
+
+.collapse-list {
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.collapse-open {
+  display: none;
+}
+
+.collapse-painel {
+  display: none;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.1s, visibility 0.3s, opacity 0.3s;
+}
+
+.collapse-open:checked ~ .collapse-painel {
+  max-height: 100%;
+  opacity: 100;
+  display: block;
+}
+
+.collapse-list li {
+  margin-bottom: 0;
+}
+
+.collapse-list .collapse-btn {
+  border-top: 1px solid #e0e0e0;
+  cursor: pointer;
+  display: block;
+  padding: 15px 10px;
+  margin-bottom: 0;
+  font-weight: normal;
+  transition: background-color 0.2s ease;
+}
+
+.collapse-list .collapse-btn:hover {
+  background: #eee;
+}
+
+.collapse-open ~ .collapse-btn:before {
+  content: "↓";
+  float: right;
+}
+
+.collapse-open:checked ~ .collapse-btn:before {
+  content: "↑";
+}
+
+.collapse-list .collapse-inner {
+  padding: 10px;
+}

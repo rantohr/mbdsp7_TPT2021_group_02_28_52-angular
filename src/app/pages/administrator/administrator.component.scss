@@ -1,0 +1,8 @@
+.nav-white {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.75rem;
+}
+.nav-white > li > a {
+  color: white !important;
+}

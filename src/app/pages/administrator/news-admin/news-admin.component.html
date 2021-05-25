@@ -1,0 +1,53 @@
+<app-breadcomb-area [title]="'News'" [description]="'Home news'"></app-breadcomb-area>
+
+<div class="container">
+    <div class="row" *ngIf="!formView">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="normal-table-list">
+                <div class="basic-tb-hd" style="display: flex; justify-content: space-between;">
+                    <h2>News</h2>
+                    <button mat-mini-fab (click)="formView = !formView">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+                <div class="bsc-tbl">
+                    <table class="table table-sc-ex">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Date</th>
+                                <th>Image</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Last game</td>
+                                <td style="max-width: 20vw;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vehicula erat sit amet aliquam vehicula. Aliquam aliquet et risus et consequat. Quisque ultrices nulla eu magna vulputate, quis varius massa tempor. Suspendisse sed condimentum purus, eget consequat dolor. Fusce aliquet ultricies porta. Nunc semper commodo leo at maximus. Duis maximus maximus leo, id lobortis nisi aliquam sit amet. Nullam vel ex id augue scelerisque congue sit amet eget urna.</td>
+                                <td>20 May 2021 04:30 PM</td>
+                                <td>
+                                    <img src="assets/image/notexist.jpg" alt="news">
+                                </td>
+                                <td style="padding-top: 0;">
+                                    <button mat-mini-fab style="transform: scale(0.7);">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                    <button mat-mini-fab style="transform: scale(0.7);" (click)="warningDialog()">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="formView">
+        <app-news-form></app-news-form>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+<app-breadcomb-area [title]="'Google Maps'" [description]="'Top 5 most active region'"></app-breadcomb-area>
+
+<div class="container">
+    <div class="google-map-single">
+        <div id="map2"></div>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<app-breadcomb-area [title]="'Analitics'" [description]="'Statistics and charts'"></app-breadcomb-area>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <app-area-chart></app-area-chart>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+            <div class="search-engine-int sm-res-mg-t-30 tb-res-mg-t-30 tb-res-ds-n dk-res-ds">
+                <div class="contact-hd search-hd-eg">
+                    <h2>Site Performance</h2>
+                    <p>Fusce eget dolor id justo luctus commodo vel pharetra nisi. Donec velit libero</p>
+                </div>
+                <div class="search-eg-table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Work Flow</th>
+                                <th class="text-right">Counter</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>External Backlinks</td>
+                                <td class="text-right">
+                                    <h4>54,302</h4>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Page Speed Score</td>
+                                <td class="text-right">
+                                    <h4>87</h4>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Citation Flow</td>
+                                <td class="text-right">
+                                    <h4>987</h4>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mozrank</td>
+                                <td class="text-right">
+                                    <h4>9.43</h4>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Domain Authority</td>
+                                <td class="text-right">
+                                    <h4>455</h4>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="analysis-rd-mg">Alexa Rank</td>
+                                <td class="text-right analysis-rd-mg">
+                                    <h4>342,234</h4>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <app-line-chart></app-line-chart>
+        </div>
+    </div>
+</div>
