@@ -16,34 +16,33 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>Username</th>
+                                <th>Email</th>
                                 <th>Birth Date</th>
                                 <th>Gender</th>
-                                <th>Money</th>
+                                <th>Money ($)</th>
                                 <th>Tokens</th>
-                                <th>Location</th>
                                 <th>Image</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Alexandra Christopher</td>
-                                <td>@alexCh12</td>
-                                <td>13 Feb 1993</td>
-                                <td>♂️</td>
-                                <td>45000.0$</td>
-                                <td>90</td>
-                                <td>United Arab Emirates</td>
+                            <tr *ngFor="let user of users; let i = index">
+                                <td>{{ i+1 }}</td>
+                                <td>{{ user.name }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.birthDate | date }}</td>
+                                <td>{{ user.gender=='m' ? '♂️' : '♀' }}</td>
+                                <td>{{ user.money }}</td>
+                                <td>{{ user.tokens }}</td>
                                 <td>
-                                    <img src="assets/image/notexist.jpg" alt="profil">
+                                    <img [src]="user.image || 'assets/image/notexist.jpg'" alt="profil"
+                                        style="width: 5em; height: 5em; object-fit: cover;">
                                 </td>
                                 <td style="padding-top: 0;">
-                                    <button mat-mini-fab style="transform: scale(0.7);">
+                                    <button mat-mini-fab style="transform: scale(0.7);" (click)="selectItem(user)">
                                         <mat-icon>edit</mat-icon>
                                     </button>
-                                    <button mat-mini-fab style="transform: scale(0.7);" (click)="warningDialog()">
+                                    <button mat-mini-fab style="transform: scale(0.7);" (click)="warningDialog(user)">
                                         <mat-icon>delete</mat-icon>
                                     </button>
                                 </td>
@@ -56,6 +55,6 @@
     </div>
 
     <div class="row" *ngIf="formView">
-        <app-users-form></app-users-form>
+        <app-users-form [data]="selectedItem" (formEvent)="receiveFormEvent($event)"></app-users-form>
     </div>
 </div>

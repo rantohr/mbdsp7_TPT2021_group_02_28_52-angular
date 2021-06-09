@@ -23,19 +23,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Last game</td>
-                                <td style="max-width: 20vw;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vehicula erat sit amet aliquam vehicula. Aliquam aliquet et risus et consequat. Quisque ultrices nulla eu magna vulputate, quis varius massa tempor. Suspendisse sed condimentum purus, eget consequat dolor. Fusce aliquet ultricies porta. Nunc semper commodo leo at maximus. Duis maximus maximus leo, id lobortis nisi aliquam sit amet. Nullam vel ex id augue scelerisque congue sit amet eget urna.</td>
-                                <td>20 May 2021 04:30 PM</td>
+                            <tr *ngFor="let item of news; let i = index">
+                                <td>{{ i+1 }}</td>
+                                <td>{{ item.title }}</td>
+                                <td style="max-width: 20vw;">{{ item.description }}</td>
+                                <td>{{ item.date | date }}</td>
                                 <td>
-                                    <img src="assets/image/notexist.jpg" alt="news">
+                                    <img [src]="item.image" alt="news" style="width: 5em; height: 5em; object-fit: cover;">
                                 </td>
                                 <td style="padding-top: 0;">
-                                    <button mat-mini-fab style="transform: scale(0.7);">
+                                    <button mat-mini-fab style="transform: scale(0.7);" (click)="selectItem(item)">
                                         <mat-icon>edit</mat-icon>
                                     </button>
-                                    <button mat-mini-fab style="transform: scale(0.7);" (click)="warningDialog()">
+                                    <button mat-mini-fab style="transform: scale(0.7);" (click)="warningDialog(item)">
                                         <mat-icon>delete</mat-icon>
                                     </button>
                                 </td>
@@ -48,6 +48,6 @@
     </div>
 
     <div class="row" *ngIf="formView">
-        <app-news-form></app-news-form>
+        <app-news-form [data]="selectedItem" (formEvent)="receiveFormEvent($event)"></app-news-form>
     </div>
 </div>

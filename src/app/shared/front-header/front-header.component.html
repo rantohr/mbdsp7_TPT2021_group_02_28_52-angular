@@ -7,23 +7,24 @@
             <div class="row">
                 <aside class="col-md-4">
                     <ul class="sportsmagazine-social-network">
-                        <li><a
-                                class="sportsmagazine-colorhover fa fa-facebook-official"></a></li>
-                        <li><a
-                                class="sportsmagazine-colorhover fa fa-twitter-square"></a></li>
-                        <li><a
-                                class="sportsmagazine-colorhover fa fa-linkedin-square"></a></li>
-                        <li><a
-                                class="sportsmagazine-colorhover fa fa-google-plus-square"></a></li>
+                        <li><a class="sportsmagazine-colorhover fa fa-facebook-official"></a></li>
+                        <li><a class="sportsmagazine-colorhover fa fa-twitter-square"></a></li>
+                        <li><a class="sportsmagazine-colorhover fa fa-linkedin-square"></a></li>
+                        <li><a class="sportsmagazine-colorhover fa fa-google-plus-square"></a></li>
                     </ul>
                 </aside>
                 <aside class="col-md-8">
                     <ul class="sportsmagazine-user-section">
                         <li><i class="fa fa-dollar"></i> <a>Tokens : 500</a></li>
-                        <li><i class="fa fa-user"></i> <a href="#" data-toggle="modal"
+                        <li><i class="fa fa-user"></i> <a id="loginBtn" href="#" data-toggle="modal"
                                 data-target="#loginModal">Login</a></li>
-                        <li><i class="fa fa-sign-in"></i> <a href="#" data-toggle="modal"
+                        <li><i class="fa fa-sign-in"></i> <a href="#" (click)="signout()">Sign out</a></li>
+                        <li style="display: none;"><i class="fa fa-sign-in"></i> <a href="#" id="registerBtn" data-toggle="modal"
                                 data-target="#signupModal">Sign Up</a></li>
+                        <li style="display: none;"><i class="fa fa-user"></i> <a id="forgetBtn" href="#" data-toggle="modal"
+                                data-target="#forgetModal">forget</a></li>
+                        <li style="display: none;"><i class="fa fa-user"></i> <a id="resetBtn" href="#" data-toggle="modal"
+                                data-target="#resetModal">reset</a></li>
                     </ul>
                 </aside>
             </div>
@@ -35,8 +36,8 @@
     <div class="sportsmagazine-main-header">
         <div class="container">
             <div class="row">
-                <aside class="col-md-2"><a href="index-2.html" class="sportsmagazine-logo"><img src="assets/image/logo-1.png"
-                            alt=""></a></aside>
+                <aside class="col-md-2"><a href="index-2.html" class="sportsmagazine-logo"><img
+                            src="assets/image/logo-1.png" alt=""></a></aside>
                 <div class="col-md-10">
                     <div class="sportsmagazine-right-section">
                         <nav class="navbar navbar-default">
@@ -51,14 +52,19 @@
                             </div>
                             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                                 <ul class="nav navbar-nav">
-                                    <li class="sportsmagazine-megamenu-li"><a role="button" (click)="toHome()">HOME</a></li>
-                                    <li class="sportsmagazine-megamenu-li"><a role="button" (click)="toFixtures()">FIXTURES</a></li>
-                                    <li class="sportsmagazine-megamenu-li"><a role="button" (click)="toResults()">RESULTS</a></li>
-                                    <li class="sportsmagazine-megamenu-li"><a role="button" (click)="toHistory()">HISTORY</a></li>
+                                    <li class="sportsmagazine-megamenu-li"><a role="button" (click)="toHome()">HOME</a>
+                                    </li>
+                                    <li class="sportsmagazine-megamenu-li"><a role="button"
+                                            (click)="toFixtures()">FIXTURES</a></li>
+                                    <li class="sportsmagazine-megamenu-li"><a role="button"
+                                            (click)="toResults()">RESULTS</a></li>
+                                    <li class="sportsmagazine-megamenu-li"><a role="button"
+                                            (click)="toHistory()">HISTORY</a></li>
                                 </ul>
                             </div>
                         </nav>
-                        <a data-toggle="modal" data-target="#searchModal" href="#" class="sportsmagazine-search-btn sportsmagazine-colorhover"><i class="fa fa-search"></i></a>
+                        <a data-toggle="modal" data-target="#searchModal" href="#"
+                            class="sportsmagazine-search-btn sportsmagazine-colorhover"><i class="fa fa-search"></i></a>
                     </div>
                 </div>
             </div>

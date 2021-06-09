@@ -1,0 +1,16 @@
+<!-- LoginModal -->
+<div class="loginmodal modal fade" id="forgetModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="sportsmagazine-login-box">
+            <a  [routerLink]="['./']" fragment="" data-dismiss="modal" class="close-modal sportsmagazine-login-close sportsmagazine-color"><i class="fa fa-dollar"></i></a>
+            <h4>Forget Password</h4>
+            <form>
+                <input type="text" value="Enter email*" onblur="if(this.value == '') { this.value ='Enter email*'; }" onfocus="if(this.value =='Enter email*') { this.value = ''; }">
+                <div class="clearfix"></div>
+                <label><input type="submit" value="Send" class="sportsmagazine-bordercolor sportsmagazine-color"></label>
+            </form>
+            <p><a [routerLink]="['./']" fragment="" (click)="switchInterface('login')" class="sportsmagazine-color">Sign in</a></p>
+        </div>
+    <div class="clearfix"></div>
+    </div>
+</div>

@@ -14,32 +14,50 @@ import { NewsAdminComponent } from './pages/administrator/news-admin/news-admin.
 import { SettingsAdminComponent } from './pages/administrator/settings-admin/settings-admin.component';
 import { UsersAdminComponent } from './pages/administrator/users-admin/users-admin.component';
 import { HomeComponent } from './pages/home/home.component';
+import { AuthGuard } from './core/service/auth/auth.guard';
+import { RoleGuardService } from './core/service/auth/role.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'fixtures', component: FixturesComponent },
-  { path: 'details', component: FixtureDetailComponent },
-  { path: 'results', component: FixtureResultsComponent },
-  { path: 'history', component: BetHistoryComponent },
+  {
+    path: 'fixtures',
+    component: FixturesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'details',
+    component: FixtureDetailComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'results',
+    component: FixtureResultsComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'history', component: BetHistoryComponent, canActivate: [AuthGuard] },
   {
     path: 'administrator',
     component: AdministratorComponent,
     children: [
-      { path: '', redirectTo: 'home', pathMatch: 'full'},
-      { path: 'home', component: HomeAdminComponent, canActivate: [] },
-      { path: 'match', component: MatchsAdminComponent, canActivate: [] },
-      { path: 'users', component: UsersAdminComponent, canActivate: [] },
-      { path: 'charts', component: ChartsAdminComponent, canActivate: [] },
-      { path: 'bets', component: BetsAdminComponent, canActivate: [] },
-      { path: 'news', component: NewsAdminComponent, canActivate: [] },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: HomeAdminComponent },
+      { path: 'match', component: MatchsAdminComponent },
+      { path: 'users', component: UsersAdminComponent },
+      { path: 'charts', component: ChartsAdminComponent },
+      { path: 'bets', component: BetsAdminComponent },
+      { path: 'news', component: NewsAdminComponent },
     ],
+    canActivate: [AuthGuard, RoleGuardService],
+    data: {
+      role: ['admin'],
+    },
   },
   { path: 'administrator/login', component: LoginAdminComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

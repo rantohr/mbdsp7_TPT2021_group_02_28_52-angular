@@ -36,6 +36,16 @@ import { BetsAdminComponent } from './pages/administrator/bets-admin/bets-admin.
 import { NewsAdminComponent } from './pages/administrator/news-admin/news-admin.component';
 import { GameFormComponent } from './shared/forms/game-form/game-form.component';
 import { NewsFormComponent } from './shared/forms/news-form/news-form.component';
+import { ForgetModalComponent } from './shared/forget-modal/forget-modal.component';
+import { ResetModalComponent } from './shared/reset-modal/reset-modal.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { AuthGuard } from './core/service/auth/auth.guard';
+import { AuthService } from './core/service/auth/auth.service';
+import { TokenInterceptor } from './core/service/http-interceptors/token-interceptor';
+import { NotificationComponent } from './shared/notification/notification.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -70,6 +80,9 @@ import { NewsFormComponent } from './shared/forms/news-form/news-form.component'
     NewsAdminComponent,
     GameFormComponent,
     NewsFormComponent,
+    ForgetModalComponent,
+    ResetModalComponent,
+    NotificationComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,9 +90,25 @@ import { NewsFormComponent } from './shared/forms/news-form/news-form.component'
     AppRoutingModule,
     MatButtonModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule,
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    AuthService,
+    AuthGuard,
+    JwtHelperService,
+    {
+      provide: JWT_OPTIONS,
+      useValue: JWT_OPTIONS,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

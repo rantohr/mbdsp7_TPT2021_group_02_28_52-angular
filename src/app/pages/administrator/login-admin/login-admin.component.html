@@ -55,32 +55,31 @@
 
 <body>
   <!-- Login Register area Start-->
-  <div class="login-content">
+  <div class="login-content" style="background: url('assets/administrator/images/bglog.jpg') no-repeat fixed center;">
     <!-- Login -->
     <div class="nk-block toggled" id="l-login">
       <div class="nk-form">
         <div class="input-group">
           <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
           <div class="nk-int-st">
-            <input type="text" class="form-control" placeholder="Username">
+            <input type="text" class="form-control" [(ngModel)]="loginBody.email" [ngModelOptions]="{standalone: true}" placeholder="Enter your email">
           </div>
         </div>
         <div class="input-group mg-t-15">
           <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-edit"></i></span>
           <div class="nk-int-st">
-            <input type="password" class="form-control" placeholder="Password">
+            <input type="password" class="form-control" [(ngModel)]="loginBody.password" [ngModelOptions]="{standalone: true}" placeholder="Enter your password">
           </div>
         </div>
         <div class="fm-checkbox">
           <label><input type="checkbox" class="i-checks"> <i></i> Keep me signed in</label>
         </div>
-        <a href="#l-register" data-ma-action="nk-login-switch" data-ma-block="#l-register"
-          class="btn btn-login btn-success btn-float"><i class="notika-icon notika-right-arrow right-arrow-ant"></i></a>
+        <p *ngIf="error" style="color: red;">{{ error }}</p>
+        <a [routerLink]="['./']" fragment="" data-ma-action="nk-login-switch" data-ma-block="#l-register"
+          class="btn btn-login btn-success btn-float" (click)="login()"><i class="notika-icon notika-right-arrow right-arrow-ant"></i></a>
       </div>
 
       <div class="nk-navigation nk-lg-ic">
-        <a [routerLink]="['./']" fragment="l-register" data-ma-action="nk-login-switch" data-ma-block="#l-register"
-          (click)="switchView('register')"><i class="notika-icon notika-plus-symbol"></i> <span>Register</span></a>
         <a [routerLink]="['./']" fragment="l-forget" data-ma-action="nk-login-switch" data-ma-block="#l-forget-password"
           (click)="switchView('forget')"><i>?</i> <span>Forgot
             Password</span></a>
@@ -127,8 +126,9 @@
     <!-- Forgot Password -->
     <div class="nk-block" id="l-forget-password">
       <div class="nk-form">
-        <p class="text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu risus. Curabitur commodo
-          lorem fringilla enim feugiat commodo sed ac lacus.</p>
+        <p class="text-left">
+          We will send you an email so you can reset your password
+        </p>
 
         <div class="input-group">
           <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-mail"></i></span>
@@ -144,8 +144,6 @@
       <div class="nk-navigation nk-lg-ic rg-ic-stl">
         <a [routerLink]="['./']" fragment="l-login" data-ma-action="nk-login-switch" data-ma-block="#l-login"
           (click)="switchView('login')"><i class="notika-icon notika-right-arrow"></i> <span>Sign in</span></a>
-        <a [routerLink]="['./']" fragment="l-register" data-ma-action="nk-login-switch" data-ma-block="#l-register"
-          (click)="switchView('register')"><i class="notika-icon notika-plus-symbol"></i> <span>Register</span></a>
       </div>
     </div>
   </div>

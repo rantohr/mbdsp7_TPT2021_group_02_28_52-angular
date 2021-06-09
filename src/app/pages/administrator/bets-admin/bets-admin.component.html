@@ -6,59 +6,61 @@
             <div class="invoice-wrap">
 
                 <ul class="collapse-list">
-                    <li>
-                        <input class="collapse-open" type="checkbox" id="collapse-1">
-                        <label class="collapse-btn" for="collapse-1">Settings</label>
-                        <div class="collapse-painel">
-                            <div class="collapse-inner">
-                                <div class="invoice-img">
-                                    <div class="form-example-wrap mg-t-30">
-                                        <div class="cmp-tb-hd cmp-int-hd">
-                                            <h2>Config Token</h2>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group">
-                                                <div class="nk-int-st"
-                                                    style="display: flex; justify-content: center; gap: 2em;">
-                                                    <input type="number" class="form-control input-sm"
-                                                        placeholder="Enter Token Value" style="width: 50%;">
-                                                    <button
-                                                        class="btn btn-success notika-btn-success waves-effect">Submit</button>
-                                                </div>
+                    <input class="collapse-open" type="checkbox" id="collapse-1">
+                    <label class="collapse-btn" for="collapse-1">Settings</label>
+                    <div class="collapse-painel">
+                        <div class="collapse-inner">
+                            <div class="invoice-img">
+                                <div class="form-example-wrap mg-t-30">
+                                    <div class="cmp-tb-hd cmp-int-hd">
+                                        <h2>Config Token</h2>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="nk-int-st"
+                                                style="display: flex; justify-content: center; gap: 2em;">
+                                                <label for="">1 token = </label>
+                                                <input type="number" class="form-control input-sm"
+                                                    [(ngModel)]="config.tokenValue"
+                                                    [ngModelOptions]="{standalone: true}"
+                                                    placeholder="Enter Token Value" style="width: 15%;
+                                                        text-align: en">$
+                                                <button class="btn btn-success notika-btn-success waves-effect"
+                                                    (click)="submit()">Submit</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="row" style="margin-top: 1em;">
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                        <div class="invoice-hs">
-                                            <span>Invoice#</span>
-                                            <h2>456656</h2>
-                                        </div>
+                            <div class="row" style="margin-top: 1em;">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="invoice-hs">
+                                        <span>Invoice#</span>
+                                        <h2>456656</h2>
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                        <div class="invoice-hs date-inv sm-res-mg-t-30 tb-res-mg-t-30 tb-res-mg-t-0">
-                                            <span>Date</span>
-                                            <h2>20/03/2018</h2>
-                                        </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="invoice-hs date-inv sm-res-mg-t-30 tb-res-mg-t-30 tb-res-mg-t-0">
+                                        <span>Date</span>
+                                        <h2>20/03/2018</h2>
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                        <div class="invoice-hs wt-inv sm-res-mg-t-30 tb-res-mg-t-30 tb-res-mg-t-0">
-                                            <span>Whatever</span>
-                                            <h2>472-000</h2>
-                                        </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="invoice-hs wt-inv sm-res-mg-t-30 tb-res-mg-t-30 tb-res-mg-t-0">
+                                        <span>Whatever</span>
+                                        <h2>472-000</h2>
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                        <div class="invoice-hs gdt-inv sm-res-mg-t-30 tb-res-mg-t-30 tb-res-mg-t-0">
-                                            <span>Grand Total</span>
-                                            <h2>$25,980</h2>
-                                        </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="invoice-hs gdt-inv sm-res-mg-t-30 tb-res-mg-t-30 tb-res-mg-t-0">
+                                        <span>Grand Total</span>
+                                        <h2>$25,980</h2>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </li>
+                    </div>
                 </ul>
 
                 <div class="row" style="margin-top: 1em;">

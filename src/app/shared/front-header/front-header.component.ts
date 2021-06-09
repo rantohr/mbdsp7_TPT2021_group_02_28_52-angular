@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/service/auth/auth.service';
 
 @Component({
   selector: 'app-front-header',
@@ -10,7 +11,7 @@ export class FrontHeaderComponent implements OnInit {
 
   navigationSubscription: any; 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -31,4 +32,8 @@ export class FrontHeaderComponent implements OnInit {
     this.router.navigate(['/history']);
   }
 
+  signout(): void {
+    this.authService.clearTokens()
+    this.router.navigate(['/home']);
+  }
 }

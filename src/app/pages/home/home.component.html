@@ -12,22 +12,13 @@
                     <div class="col-md-8">
                         <div class="sportsmagazine-blog sportsmagazine-bloglarge">
                             <ul class="row">
-                                <li class="col-md-12">
-                                    <figure><img src="assets/fo/extra-images/blog-large-img1.jpg" alt=""></figure>
+                                <li class="col-md-12" *ngFor="let item of news">
+                                    <figure><img [src]="item.image" alt=""></figure>
                                     <div class="sportsmagazine-bloglarge-text">
-                                        <time datetime="2008-02-14 20:00">August 21st, 2017</time>
-                                        <h3><a href="blog-detail.html">The new eco friendly stadium won a Leafy power break fast regimen Award in 2016</a></h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac malesuada ante. Curabitur lacinia diam tempus tem cons ectetur. Sed vitae dignissim purus, eget aliquam libero. Duis et arcu a erat venenatis ornare eget nec urna.vNulla volu tpat luctus venenatis. Aliquam tellus dui, luctus nec.</p>
-                                        <a href="blog-detail.html" class="sportsmagazine-readmore-btn">READ MORE <i class="fa fa-arrow-circle-o-right"></i></a>
-                                    </div>
-                                </li>
-                                <li class="col-md-12">
-                                    <figure><img src="assets/fo/extra-images/blog-large-img4.jpg" alt=""></figure>
-                                    <div class="sportsmagazine-bloglarge-text">
-                                        <time datetime="2008-02-14 20:00">August 21st, 2017</time>
-                                        <h3><a href="blog-detail.html">The new eco friendly stadium won a Leafy power break fast regimen Award in 2016</a></h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac malesuada ante. Curabitur lacinia diam tempus tem cons ectetur. Sed vitae dignissim purus, eget aliquam libero. Duis et arcu a erat venenatis ornare eget nec urna.vNulla volu tpat luctus venenatis. Aliquam tellus dui, luctus nec.</p>
-                                        <a href="blog-detail.html" class="sportsmagazine-readmore-btn">READ MORE <i class="fa fa-arrow-circle-o-right"></i></a>
+                                        <time datetime="2008-02-14 20:00">{{ item.date | date }}</time>
+                                        <h3>{{ item.title }}</h3>
+                                        <p>{{ item.description }}</p>
+                                        
                                     </div>
                                 </li>
                             </ul>
@@ -190,3 +181,7 @@
 <app-login-modal></app-login-modal>
 
 <app-register-modal></app-register-modal>
+
+<app-forget-modal></app-forget-modal>
+
+<app-reset-modal></app-reset-modal>
