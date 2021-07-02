@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
 import { ErrorMessageHandler } from 'src/app/core/service/error-message-handler.service';
+import Swal from 'sweetalert2';
 import { NotificationComponent } from '../notification/notification.component';
 
 @Component({
@@ -10,7 +11,6 @@ import { NotificationComponent } from '../notification/notification.component';
   styleUrls: ['./register-modal.component.scss'],
 })
 export class RegisterModalComponent implements OnInit {
-
   registerBody = {
     email: undefined,
     password: undefined,
@@ -23,10 +23,12 @@ export class RegisterModalComponent implements OnInit {
     money: undefined,
     tokens: undefined,
     image: undefined,
-    createdAt: undefined
+    createdAt: undefined,
   };
 
-  error = undefined
+  qrCode = undefined;
+  error = undefined;
+  loading = false;
 
   constructor(
     private service: AuthService,
@@ -34,7 +36,9 @@ export class RegisterModalComponent implements OnInit {
     private errorMessageHandler: ErrorMessageHandler
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.qrCode = undefined;
+  }
 
   switchInterface(type): void {
     const closeBtns: any = document.getElementsByClassName('close-modal');
@@ -62,26 +66,35 @@ export class RegisterModalComponent implements OnInit {
   }
 
   register(): void {
+    this.qrCode = undefined;
+    this.loading = true;
     const closeBtns: any = document.getElementsByClassName('close-modal');
-    
+
     this.service.register(this.registerBody).subscribe(
       (res) => {
         if (res) {
-          this.snackBar.openFromComponent(NotificationComponent, {
-            duration: 4000,
-            data: {
-              message: 'Account successfully activated',
-              type: 'success',
-            },
-            panelClass: ['success-snackbar'],
+          this.loading = false;
+          Swal.fire({
+            position: 'bottom',
+            icon: 'success',
+            title: 'Account successfully activated',
+            showConfirmButton: false,
+            timer: 1500,
           });
+
+          this.qrCode = res.qrCode;
+          const qrDiv: any = document.getElementById('qrCode');
+          if (qrDiv) {
+            qrDiv.innerHTML = res.qrCode;
+          }
         }
-        Array.from(closeBtns).forEach((e: any) => {
-          e.click();
-        });
+        // Array.from(closeBtns).forEach((e: any) => {
+        //   e.click();
+        // });
       },
       (err) => {
-        this.error = this.errorMessageHandler.getSingleErrorMessage(err)
+        this.loading = false;
+        this.error = this.errorMessageHandler.getSingleErrorMessage(err);
       }
     );
   }

@@ -12,7 +12,7 @@
                 </div>
                 <div class="bsc-tbl">
                     <table class="table table-sc-ex">
-                        <thead>
+                        <thead class="theader">
                             <tr>
                                 <th>#</th>
                                 <th>Title</th>
@@ -23,8 +23,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let item of news; let i = index">
-                                <td>{{ i+1 }}</td>
+                            <tr *ngFor="let item of news | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                                <td>{{ ((p-1)*10)+i+1 }}</td>
                                 <td>{{ item.title }}</td>
                                 <td style="max-width: 20vw;">{{ item.description }}</td>
                                 <td>{{ item.date | date }}</td>
@@ -42,6 +42,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </div>
             </div>
         </div>
@@ -51,3 +52,5 @@
         <app-news-form [data]="selectedItem" (formEvent)="receiveFormEvent($event)"></app-news-form>
     </div>
 </div>
+
+<app-loader *ngIf="loading"></app-loader>

@@ -12,7 +12,7 @@
                 </div>
                 <div class="bsc-tbl">
                     <table class="table table-sc-ex">
-                        <thead>
+                        <thead class="theader">
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
@@ -26,8 +26,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let user of users; let i = index">
-                                <td>{{ i+1 }}</td>
+                            <tr *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: p }; let i = index;">
+                                <td>{{ ((p-1)*10)+i+1 }}</td>
                                 <td>{{ user.name }}</td>
                                 <td>{{ user.email }}</td>
                                 <td>{{ user.birthDate | date }}</td>
@@ -49,6 +49,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
                 </div>
             </div>
         </div>
@@ -58,3 +59,5 @@
         <app-users-form [data]="selectedItem" (formEvent)="receiveFormEvent($event)"></app-users-form>
     </div>
 </div>
+
+<app-loader *ngIf="loading"></app-loader>

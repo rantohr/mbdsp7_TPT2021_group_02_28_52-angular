@@ -14,6 +14,8 @@ export class NewsAdminComponent implements OnInit {
   formView = false;
   news = [];
   selectedItem: any;
+  loading = false;
+  p: number = 1;
 
   constructor(
     private service: NewsService,
@@ -37,23 +39,31 @@ export class NewsAdminComponent implements OnInit {
       cancelButtonText: 'No, keep it',
     }).then((result) => {
       if (result.isConfirmed) {
+        this.loading = true;
         this.service.delete(news._id).subscribe(
           (res) => {
             if (res) {
-              Swal.fire('Deleted!', 'This news has been deleted.', 'success');
+              this.loading = false;
+              Swal.fire({
+                position: 'bottom',
+                icon: 'success',
+                title: 'News deleted successfully',
+                showConfirmButton: false,
+                timer: 1500,
+              });
               this.service.get().subscribe((news) => {
                 if (news) this.news = news;
               });
             }
           },
           (err) => {
-            this.snackBar.openFromComponent(NotificationComponent, {
-              duration: 4000,
-              data: {
-                message: this.errorMessageHandler.getSingleErrorMessage(err),
-                type: 'error',
-              },
-              panelClass: ['error-snackbar'],
+            this.loading = false;
+            Swal.fire({
+              position: 'bottom',
+              icon: 'error',
+              title: this.errorMessageHandler.getSingleErrorMessage(err),
+              showConfirmButton: false,
+              timer: 3000,
             });
           }
         );
@@ -72,17 +82,18 @@ export class NewsAdminComponent implements OnInit {
     if (event == -1) {
       this.formView = !this.formView;
     } else {
+      this.loading = true;
       !event._id
         ? this.service.create(event).subscribe(
             (res) => {
               if (res) {
-                this.snackBar.openFromComponent(NotificationComponent, {
-                  duration: 4000,
-                  data: {
-                    message: 'News added successfully',
-                    type: 'success',
-                  },
-                  panelClass: ['success-snackbar'],
+                this.loading = false;
+                Swal.fire({
+                  position: 'bottom',
+                  icon: 'success',
+                  title: 'News added successfully',
+                  showConfirmButton: false,
+                  timer: 1500,
                 });
                 this.formView = !this.formView;
                 this.service.get().subscribe((news) => {
@@ -91,26 +102,26 @@ export class NewsAdminComponent implements OnInit {
               }
             },
             (err) => {
-              this.snackBar.openFromComponent(NotificationComponent, {
-                duration: 4000,
-                data: {
-                  message: this.errorMessageHandler.getSingleErrorMessage(err),
-                  type: 'error',
-                },
-                panelClass: ['error-snackbar'],
+              this.loading = false;
+              Swal.fire({
+                position: 'bottom',
+                icon: 'error',
+                title: this.errorMessageHandler.getSingleErrorMessage(err),
+                showConfirmButton: false,
+                timer: 3000,
               });
             }
           )
         : this.service.update(event).subscribe(
             (res) => {
               if (res) {
-                this.snackBar.openFromComponent(NotificationComponent, {
-                  duration: 4000,
-                  data: {
-                    message: 'News updated successfully',
-                    type: 'success',
-                  },
-                  panelClass: ['success-snackbar'],
+                this.loading = false;
+                Swal.fire({
+                  position: 'bottom',
+                  icon: 'success',
+                  title: 'News updated successfully',
+                  showConfirmButton: false,
+                  timer: 1500,
                 });
                 this.formView = !this.formView;
                 this.service.get().subscribe((news) => {
@@ -119,13 +130,13 @@ export class NewsAdminComponent implements OnInit {
               }
             },
             (err) => {
-              this.snackBar.openFromComponent(NotificationComponent, {
-                duration: 4000,
-                data: {
-                  message: this.errorMessageHandler.getSingleErrorMessage(err),
-                  type: 'error',
-                },
-                panelClass: ['error-snackbar'],
+              this.loading = false;
+              Swal.fire({
+                position: 'bottom',
+                icon: 'error',
+                title: this.errorMessageHandler.getSingleErrorMessage(err),
+                showConfirmButton: false,
+                timer: 3000,
               });
             }
           );

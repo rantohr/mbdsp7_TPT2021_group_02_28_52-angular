@@ -742,13 +742,14 @@ address { font-style: italic; }
 .sportsmagazine-login-close {
     position: absolute;
     right: -24px;
-    top: -24px;
     width: 59px;
     height: 59px;
     background-color: #28292b;
     border-radius: 100%;
     text-align: center;
     padding-top: 16px;
+    transform: scale(2);
+    font-size: large;
 }
 /* CartBox */
 .sportsmagazine-cart-box {
@@ -4532,8 +4533,12 @@ blockquote span:before {
 .sportsmagazine-first-team,.sportsmagazine-second-team {
     background-color: #ededed;
     float: left;
-    padding: 28px 36px 29px 91px;
+    padding: 20px 5px;
     position: relative;
+    width: 20em;
+    height: 8.5em;
+    display: flex;
+    justify-content: space-evenly;
 }
 .sportsmagazine-first-team:before {
     content: '';
@@ -4562,7 +4567,6 @@ blockquote span:before {
 }
 .sportsmagazine-first-team figure,.sportsmagazine-second-team figure {
     margin: 0px;
-    float: right;
     width: 55px;
 }
 .sportsmagazine-teams-match figure a img,.sportsmagazine-teams-match figure a {
@@ -4837,7 +4841,7 @@ blockquote span:before {
     float: left;
     background-color: #292c31;
     text-align: center;
-    padding: 40px 25px 40px 26px;
+    padding: 40px 25px 40px 0px;
     position: relative;
     margin: 0px 0px 0px -15px;
 }
@@ -4971,7 +4975,7 @@ blockquote span:before {
     float: right;
     background-color: #292c31;
     text-align: center;
-    padding: 40px 17px 40px 16px;
+    padding: 40px 0px 40px 16px;
     position: relative;
     margin: 0px -15px 0px 0px;
 }

@@ -17,7 +17,7 @@ import { BetHistoryComponent } from './pages/bet-history/bet-history.component';
 import { HomeAdminComponent } from './pages/administrator/home-admin/home-admin.component';
 import { LoginAdminComponent } from './pages/administrator/login-admin/login-admin.component';
 import { AdministratorComponent } from './pages/administrator/administrator.component';
-import { MatchsAdminComponent } from './pages/administrator/matchs-admin/matchs-admin.component';
+import { MatchesAdminComponent } from './pages/administrator/matches-admin/matches-admin.component';
 import { UsersAdminComponent } from './pages/administrator/users-admin/users-admin.component';
 import { SettingsAdminComponent } from './pages/administrator/settings-admin/settings-admin.component';
 import { ChartsAdminComponent } from './pages/administrator/charts-admin/charts-admin.component';
@@ -46,6 +46,9 @@ import { AuthService } from './core/service/auth/auth.service';
 import { TokenInterceptor } from './core/service/http-interceptors/token-interceptor';
 import { NotificationComponent } from './shared/notification/notification.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { LoaderComponent } from './shared/loader/loader.component';
+import { UserProfilModalComponent } from './shared/user-profil-modal/user-profil-modal.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -65,7 +68,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     LoginAdminComponent,
     AdministratorComponent,
     HomeAdminComponent,
-    MatchsAdminComponent,
+    MatchesAdminComponent,
     UsersAdminComponent,
     SettingsAdminComponent,
     ChartsAdminComponent,
@@ -83,6 +86,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ForgetModalComponent,
     ResetModalComponent,
     NotificationComponent,
+    LoaderComponent,
+    UserProfilModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,7 +98,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatDialogModule,
     MatSnackBarModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [
     AuthService,
@@ -111,4 +117,4 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

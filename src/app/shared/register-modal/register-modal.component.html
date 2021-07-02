@@ -1,10 +1,10 @@
-<!-- SignupModal -->
+<!-- Sign up Modal -->
 <div class="loginmodal modal fade" id="signupModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="sportsmagazine-login-box">
-            <a  [routerLink]="['./']" fragment="" data-dismiss="modal" class="close-modal sportsmagazine-login-close sportsmagazine-color"><i class="fa fa-dollar"></i></a>
+            <a  [routerLink]="['./']" fragment="" data-dismiss="modal" class="close-modal sportsmagazine-login-close sportsmagazine-color"><i class="fa fa-times"></i></a>
             <h4>Sign Up Now</h4>
-            <form>
+            <form *ngIf="!qrCode">
                 <input type="text"  [(ngModel)]="registerBody.name" [ngModelOptions]="{standalone: true}" placeholder="Enter your name*">
                 
                 <div style="margin: 1em 0;">
@@ -25,6 +25,8 @@
                 <label><input type="submit" (click)="register()" value="Sign Up" class="sportsmagazine-bordercolor sportsmagazine-color"></label>
             </form>
             <p *ngIf="error" style="color: red;">{{ error }}</p>
+            <pre id="qrCode" style="line-height: 1 !important;">
+            </pre>
             <p>Already have an account ? <a [routerLink]="['./']" fragment="" (click)="switchInterface('login')" class="sportsmagazine-color">Login - Now !</a></p>
         </div>
     <div class="clearfix"></div>

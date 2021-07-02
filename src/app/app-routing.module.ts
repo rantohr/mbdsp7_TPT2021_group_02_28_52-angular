@@ -9,7 +9,7 @@ import { BetsAdminComponent } from './pages/administrator/bets-admin/bets-admin.
 import { ChartsAdminComponent } from './pages/administrator/charts-admin/charts-admin.component';
 import { HomeAdminComponent } from './pages/administrator/home-admin/home-admin.component';
 import { LoginAdminComponent } from './pages/administrator/login-admin/login-admin.component';
-import { MatchsAdminComponent } from './pages/administrator/matchs-admin/matchs-admin.component';
+import { MatchesAdminComponent } from './pages/administrator/matches-admin/matches-admin.component';
 import { NewsAdminComponent } from './pages/administrator/news-admin/news-admin.component';
 import { SettingsAdminComponent } from './pages/administrator/settings-admin/settings-admin.component';
 import { UsersAdminComponent } from './pages/administrator/users-admin/users-admin.component';
@@ -42,7 +42,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeAdminComponent },
-      { path: 'match', component: MatchsAdminComponent },
+      { path: 'match', component: MatchesAdminComponent },
       { path: 'users', component: UsersAdminComponent },
       { path: 'charts', component: ChartsAdminComponent },
       { path: 'bets', component: BetsAdminComponent },

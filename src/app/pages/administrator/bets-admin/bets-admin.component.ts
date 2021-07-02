@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BetsService } from 'src/app/core/service/bets.service';
 import { ConfigsService } from 'src/app/core/service/configs.service';
 import { ErrorMessageHandler } from 'src/app/core/service/error-message-handler.service';
 import { NotificationComponent } from 'src/app/shared/notification/notification.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-bets-admin',
@@ -11,44 +13,55 @@ import { NotificationComponent } from 'src/app/shared/notification/notification.
 })
 export class BetsAdminComponent implements OnInit {
   config: any;
+  loading = false;
+  bets = []
+  p: number = 1;
 
   constructor(
     private service: ConfigsService,
+    private betsService: BetsService,
     private snackBar: MatSnackBar,
     private errorMessageHandler: ErrorMessageHandler
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.service.get().subscribe((conf) => {
       if (conf && conf.length) this.config = conf[0];
     });
+    this.betsService.getJava().subscribe((bets) => {
+      if (bets) {
+        this.bets = bets;
+        console.log("🚀 ~ file: bets-admin.component.ts ~ line 34 ~ BetsAdminComponent ~ this.betsService.getJava ~ this.bets", this.bets)
+      }
+    });
   }
 
   submit(): void {
+    this.loading = true;
     this.service.update(this.config).subscribe(
       (res) => {
         if (res) {
-          this.snackBar.openFromComponent(NotificationComponent, {
-            duration: 4000,
-            data: {
-              message: 'Logged successfully',
-              type: 'success',
-            },
-            panelClass: ['success-snackbar'],
+          Swal.fire({
+            position: 'bottom',
+            icon: 'success',
+            title: 'Configs updated successfully',
+            showConfirmButton: false,
+            timer: 1500,
           });
           this.service.get().subscribe((conf) => {
             if (conf && conf.length) this.config = conf[0];
           });
+          this.loading = false;
         }
       },
       (err) => {
-        this.snackBar.openFromComponent(NotificationComponent, {
-          duration: 4000,
-          data: {
-            message: this.errorMessageHandler.getSingleErrorMessage(err),
-            type: 'error',
-          },
-          panelClass: ['error-snackbar'],
+        this.loading = false;
+        Swal.fire({
+          position: 'bottom',
+          icon: 'error',
+          title: this.errorMessageHandler.getSingleErrorMessage(err),
+          showConfirmButton: false,
+          timer: 3000,
         });
       }
     );

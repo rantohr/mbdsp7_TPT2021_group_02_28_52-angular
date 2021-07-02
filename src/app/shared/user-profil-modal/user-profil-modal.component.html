@@ -1,0 +1,56 @@
+<!-- Sign up Modal -->
+<div class="loginmodal modal fade" id="userProfilModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="sportsmagazine-login-box">
+            <a [routerLink]="['./']" fragment="" data-dismiss="modal"
+                class="close-modal sportsmagazine-login-close sportsmagazine-color"><i class="fa fa-times"></i></a>
+            <h4>User Profile</h4>
+            <form *ngIf="editMode">
+                <input type="text" [(ngModel)]="registerBody.name" [ngModelOptions]="{standalone: true}"
+                    placeholder="Enter your name*">
+
+                <input type="text" [(ngModel)]="registerBody.email" [ngModelOptions]="{standalone: true}"
+                    placeholder="Enter your email*">
+
+                <div style="margin: 1em 0;">
+                    <p style="float: left; width: max-content; margin-right: 1em;">Birth Date: </p><input type="date"
+                        [ngModel]="registerBody.birthDate | date:'yyyy-MM-dd'"
+                        (ngModelChange)="registerBody.birthDate=$event" [ngModelOptions]="{standalone: true}"
+                        placeholder="*">
+                </div>
+
+                <div style="margin: 1em 0;">
+                    <input type="radio" [(ngModel)]="registerBody.gender" [ngModelOptions]="{standalone: true}"
+                        value="m"> male
+                    <input type="radio" [(ngModel)]="registerBody.gender" [ngModelOptions]="{standalone: true}"
+                        value="f" style="margin-left: 1em"> female
+                </div>
+
+                <input type="text" [(ngModel)]="registerBody.money" [ngModelOptions]="{standalone: true}"
+                    placeholder="Enter your money">
+
+                <div class="clearfix"></div>
+                <a (click)="editMode = !editMode" [routerLink]="['./']" fragment="" role="button" class="ticket-buy-btn"
+                    style="margin-top: 0;">Cancel</a>
+                <label><input type="submit" (click)="updateInfo()" value="Update"
+                        class="sportsmagazine-bordercolor sportsmagazine-color"></label>
+            </form>
+
+            <div *ngIf="!editMode">
+                <h5 style="color: white; text-align: center;">{{ registerBody?.name }}</h5>
+                <p>Birth Date: {{ registerBody?.birthDate  | date:'yyyy-MM-dd' }}</p>
+                <p>Gender: {{ registerBody?.gender }}</p>
+                <p>Money: {{ registerBody?.money }}</p>
+                <p>Email: {{ registerBody?.email }}</p>
+                <pre id="qrCodeProfile" style="line-height: 1 !important;">{{ registerBody?.qrCode }}</pre>
+
+                <br>
+                <a (click)="editMode = !editMode" [routerLink]="['./']" fragment="" role="button" class="ticket-buy-btn"
+                    style="margin-top: 0;">Edit</a>
+            </div>
+
+            <p *ngIf="error" style="color: red;">{{ error }}</p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

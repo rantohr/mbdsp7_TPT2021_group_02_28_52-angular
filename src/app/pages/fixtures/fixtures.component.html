@@ -26,259 +26,35 @@
 						<div class="col-md-12">
                             <div class="sportsmagazine-fixture sportsmagazine-fixture-list">
                                 <ul class="row">
-                                    <li class="col-md-12">
+                                    <li class="col-md-12" *ngFor="let item of games; let i = index">
                                         <div class="sportsmagazine-fixture-wrap">
                                             <div class="sportsmagazine-teams-match">
                                                 <div class="sportsmagazine-first-team">
-                                                    <figure><img src="assets/fo/extra-images/team-match-img1.png" alt=""></figure>
+                                                    <img [src]="item.LOGO1" alt="" style="width: 4em; height: 4em; object-fit: cover;">
                                                     <div class="sportsmagazine-first-team-info">
-                                                        <h6><a href="404.html">Yorkshire</a></h6>
-                                                        <span style="font-size: x-large; margin-right: 30%; margin-top: 10%;">x2</span>
+                                                        <h6>{{ item.NAME1 }}</h6>
+                                                        <span style="font-size: x-large; ">x{{ item.ODDS_HOME }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="sportsmagazine-match-view">
-                                                    <h5>Pool Match # 1</h5>
+                                                    <h5>Match</h5>
                                                     <span>VS</span>
                                                 </div>
                                                 <div class="sportsmagazine-second-team">
-                                                    <figure><img src="assets/fo/extra-images/team-match-img2.png" alt=""></figure>
+                                                    <img [src]="item.LOGO2" alt="" style="width: 4em; height: 4em; object-fit: cover;">
                                                     <div class="sportsmagazine-second-team-info">
-                                                        <h6><a href="404.html">Sharks Club</a></h6>
-                                                        <span style="font-size: x-large; margin-left: 30%; margin-top: 10%;">x2</span>
+                                                        <h6>{{ item.NAME2 }}</h6>
+                                                        <span style="font-size: x-large;">x{{ item.ODDS_AWAY }}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="sportsmagazine-buy-ticket">
                                                 <div class="sportsmagazine-buy-ticket-text" style="margin-left: -5%;">
-                                                    <h5>Country Durham, UK</h5>
-                                                    <time datetime="2008-02-14 20:00">August 21st, 2017 <span>@ 9:00 PM</span></time>
+                                                    <h5>{{ item.STADIUM }}</h5>
+                                                    <time datetime="2008-02-14 20:00">{{ item.date | date }}<span>@ {{ item.date | date: 'HH:mm' }}</span></time>
                                                 </div>
-                                                <a data-toggle="modal" data-target="#betModal" class="ticket-buy-btn" style="margin-left: 2%;">Bet</a>
-                                                <a role="button" (click)="toDetails()" class="ticket-buy-btn">Details</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="col-md-12">
-                                        <div class="sportsmagazine-fixture-wrap">
-                                            <div class="sportsmagazine-teams-match">
-                                                <div class="sportsmagazine-first-team">
-                                                    <figure><img src="assets/fo/extra-images/team-match-img3.png" alt=""></figure>
-                                                    <div class="sportsmagazine-first-team-info">
-                                                        <h6><a href="404.html">Yorkshire</a></h6>
-                                                        <span style="font-size: x-large; margin-right: 30%; margin-top: 10%;">x2</span>
-                                                    </div>
-                                                </div>
-                                                <div class="sportsmagazine-match-view">
-                                                    <h5>Pool Match # 2</h5>
-                                                    <span>VS</span>
-                                                </div>
-                                                <div class="sportsmagazine-second-team">
-                                                    <figure><img src="assets/fo/extra-images/team-match-img4.png" alt=""></figure>
-                                                    <div class="sportsmagazine-second-team-info">
-                                                        <h6><a href="404.html">Sharks Club</a></h6>
-                                                        <span style="font-size: x-large; margin-left: 30%; margin-top: 10%;">x2</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="sportsmagazine-buy-ticket">
-                                                <div class="sportsmagazine-buy-ticket-text" style="margin-left: -5%;">
-                                                    <h5>Country Durham, UK</h5>
-                                                    <time datetime="2008-02-14 20:00">August 21st, 2017 <span>@ 9:00 PM</span></time>
-                                                </div>
-                                                <a data-toggle="modal" data-target="#betModal" class="ticket-buy-btn" style="margin-left: 2%;">Bet</a>
-                                                <a role="button" (click)="toDetails()" class="ticket-buy-btn">Details</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="col-md-12">
-                                        <div class="sportsmagazine-fixture-wrap">
-                                            <div class="sportsmagazine-teams-match">
-                                                <div class="sportsmagazine-first-team">
-                                                    <figure><img src="assets/fo/extra-images/team-match-img2.png" alt=""></figure>
-                                                    <div class="sportsmagazine-first-team-info">
-                                                        <h6><a href="404.html">Yorkshire</a></h6>
-                                                        <span style="font-size: x-large; margin-right: 30%; margin-top: 10%;">x2</span>
-                                                    </div>
-                                                </div>
-                                                <div class="sportsmagazine-match-view">
-                                                    <h5>Pool Match # 3</h5>
-                                                    <span>VS</span>
-                                                </div>
-                                                <div class="sportsmagazine-second-team">
-                                                    <figure><img src="assets/fo/extra-images/team-match-img3.png" alt=""></figure>
-                                                    <div class="sportsmagazine-second-team-info">
-                                                        <h6><a href="404.html">Sharks Club</a></h6>
-                                                        <span style="font-size: x-large; margin-left: 30%; margin-top: 10%;">x2</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="sportsmagazine-buy-ticket">
-                                                <div class="sportsmagazine-buy-ticket-text" style="margin-left: -5%;">
-                                                    <h5>Country Durham, UK</h5>
-                                                    <time datetime="2008-02-14 20:00">August 21st, 2017 <span>@ 9:00 PM</span></time>
-                                                </div>
-                                                <a data-toggle="modal" data-target="#betModal" class="ticket-buy-btn" style="margin-left: 2%;">Bet</a>
-                                                <a role="button" (click)="toDetails()" class="ticket-buy-btn">Details</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="col-md-12">
-                                        <div class="sportsmagazine-fixture-wrap">
-                                            <div class="sportsmagazine-teams-match">
-                                                <div class="sportsmagazine-first-team">
-                                                    <figure><img src="assets/fo/extra-images/team-match-img4.png" alt=""></figure>
-                                                    <div class="sportsmagazine-first-team-info">
-                                                        <h6><a href="404.html">Yorkshire</a></h6>
-                                                        <span style="font-size: x-large; margin-right: 30%; margin-top: 10%;">x2</span>
-                                                    </div>
-                                                </div>
-                                                <div class="sportsmagazine-match-view">
-                                                    <h5>Pool Match # 4</h5>
-                                                    <span>VS</span>
-                                                </div>
-                                                <div class="sportsmagazine-second-team">
-                                                    <figure><img src="assets/fo/extra-images/team-match-img1.png" alt=""></figure>
-                                                    <div class="sportsmagazine-second-team-info">
-                                                        <h6><a href="404.html">Sharks Club</a></h6>
-                                                        <span style="font-size: x-large; margin-left: 30%; margin-top: 10%;">x2</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="sportsmagazine-buy-ticket">
-                                                <div class="sportsmagazine-buy-ticket-text" style="margin-left: -5%;">
-                                                    <h5>Country Durham, UK</h5>
-                                                    <time datetime="2008-02-14 20:00">August 21st, 2017 <span>@ 9:00 PM</span></time>
-                                                </div>
-                                                <a data-toggle="modal" data-target="#betModal" class="ticket-buy-btn" style="margin-left: 2%;">Bet</a>
-                                                <a role="button" (click)="toDetails()" class="ticket-buy-btn">Details</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="col-md-12">
-                                        <div class="sportsmagazine-fixture-wrap">
-                                            <div class="sportsmagazine-teams-match">
-                                                <div class="sportsmagazine-first-team">
-                                                    <figure><img src="assets/fo/extra-images/team-match-img3.png" alt=""></figure>
-                                                    <div class="sportsmagazine-first-team-info">
-                                                        <h6><a href="404.html">Yorkshire</a></h6>
-                                                        <span style="font-size: x-large; margin-right: 30%; margin-top: 10%;">x2</span>
-                                                    </div>
-                                                </div>
-                                                <div class="sportsmagazine-match-view">
-                                                    <h5>Pool Match # 5</h5>
-                                                    <span>VS</span>
-                                                </div>
-                                                <div class="sportsmagazine-second-team">
-                                                    <figure><img src="assets/fo/extra-images/team-match-img2.png" alt=""></figure>
-                                                    <div class="sportsmagazine-second-team-info">
-                                                        <h6><a href="404.html">Sharks Club</a></h6>
-                                                        <span style="font-size: x-large; margin-left: 30%; margin-top: 10%;">x2</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="sportsmagazine-buy-ticket">
-                                                <div class="sportsmagazine-buy-ticket-text" style="margin-left: -5%;">
-                                                    <h5>Country Durham, UK</h5>
-                                                    <time datetime="2008-02-14 20:00">August 21st, 2017 <span>@ 9:00 PM</span></time>
-                                                </div>
-                                                <a data-toggle="modal" data-target="#betModal" class="ticket-buy-btn" style="margin-left: 2%;">Bet</a>
-                                                <a role="button" (click)="toDetails()" class="ticket-buy-btn">Details</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="col-md-12">
-                                        <div class="sportsmagazine-fixture-wrap">
-                                            <div class="sportsmagazine-teams-match">
-                                                <div class="sportsmagazine-first-team">
-                                                    <figure><img src="assets/fo/extra-images/team-match-img4.png" alt=""></figure>
-                                                    <div class="sportsmagazine-first-team-info">
-                                                        <h6><a href="404.html">Yorkshire</a></h6>
-                                                        <span style="font-size: x-large; margin-right: 30%; margin-top: 10%;">x2</span>
-                                                    </div>
-                                                </div>
-                                                <div class="sportsmagazine-match-view">
-                                                    <h5>Pool Match # 6</h5>
-                                                    <span>VS</span>
-                                                </div>
-                                                <div class="sportsmagazine-second-team">
-                                                    <figure><img src="assets/fo/extra-images/team-match-img3.png" alt=""></figure>
-                                                    <div class="sportsmagazine-second-team-info">
-                                                        <h6><a href="404.html">Sharks Club</a></h6>
-                                                        <span style="font-size: x-large; margin-left: 30%; margin-top: 10%;">x2</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="sportsmagazine-buy-ticket">
-                                                <div class="sportsmagazine-buy-ticket-text" style="margin-left: -5%;">
-                                                    <h5>Country Durham, UK</h5>
-                                                    <time datetime="2008-02-14 20:00">August 21st, 2017 <span>@ 9:00 PM</span></time>
-                                                </div>
-                                                <a data-toggle="modal" data-target="#betModal" class="ticket-buy-btn" style="margin-left: 2%;">Bet</a>
-                                                <a role="button" (click)="toDetails()" class="ticket-buy-btn">Details</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="col-md-12">
-                                        <div class="sportsmagazine-fixture-wrap">
-                                            <div class="sportsmagazine-teams-match">
-                                                <div class="sportsmagazine-first-team">
-                                                    <figure><img src="assets/fo/extra-images/team-match-img1.png" alt=""></figure>
-                                                    <div class="sportsmagazine-first-team-info">
-                                                        <h6><a href="404.html">Yorkshire</a></h6>
-                                                        <span style="font-size: x-large; margin-right: 30%; margin-top: 10%;">x2</span>
-                                                    </div>
-                                                </div>
-                                                <div class="sportsmagazine-match-view">
-                                                    <h5>Pool Match # 7</h5>
-                                                    <span>VS</span>
-                                                </div>
-                                                <div class="sportsmagazine-second-team">
-                                                    <figure><img src="assets/fo/extra-images/team-match-img2.png" alt=""></figure>
-                                                    <div class="sportsmagazine-second-team-info">
-                                                        <h6><a href="404.html">Sharks Club</a></h6>
-                                                        <span style="font-size: x-large; margin-left: 30%; margin-top: 10%;">x2</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="sportsmagazine-buy-ticket">
-                                                <div class="sportsmagazine-buy-ticket-text" style="margin-left: -5%;">
-                                                    <h5>Country Durham, UK</h5>
-                                                    <time datetime="2008-02-14 20:00">August 21st, 2017 <span>@ 9:00 PM</span></time>
-                                                </div>
-                                                <a data-toggle="modal" data-target="#betModal" class="ticket-buy-btn" style="margin-left: 2%;">Bet</a>
-                                                <a role="button" (click)="toDetails()" class="ticket-buy-btn">Details</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="col-md-12">
-                                        <div class="sportsmagazine-fixture-wrap">
-                                            <div class="sportsmagazine-teams-match">
-                                                <div class="sportsmagazine-first-team">
-                                                    <figure><img src="assets/fo/extra-images/team-match-img2.png" alt=""></figure>
-                                                    <div class="sportsmagazine-first-team-info">
-                                                        <h6><a href="404.html">Yorkshire</a></h6>
-                                                        <span style="font-size: x-large; margin-right: 30%; margin-top: 10%;">x2</span>
-                                                    </div>
-                                                </div>
-                                                <div class="sportsmagazine-match-view">
-                                                    <h5>Pool Match # 8</h5>
-                                                    <span>VS</span>
-                                                </div>
-                                                <div class="sportsmagazine-second-team">
-                                                    <figure><img src="assets/fo/extra-images/team-match-img1.png" alt=""></figure>
-                                                    <div class="sportsmagazine-second-team-info">
-                                                        <h6><a href="404.html">Sharks Club</a></h6>
-                                                        <span style="font-size: x-large; margin-left: 30%; margin-top: 10%;">x2</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="sportsmagazine-buy-ticket">
-                                                <div class="sportsmagazine-buy-ticket-text" style="margin-left: -5%;">
-                                                    <h5>Country Durham, UK</h5>
-                                                    <time datetime="2008-02-14 20:00">August 21st, 2017 <span>@ 9:00 PM</span></time>
-                                                </div>
-                                                <a data-toggle="modal" data-target="#betModal" class="ticket-buy-btn" style="margin-left: 2%;">Bet</a>
-                                                <a role="button" (click)="toDetails()" class="ticket-buy-btn">Details</a>
+                                                <a data-toggle="modal" data-target="#betModal" (click)="selectMatch(item.ID)" class="ticket-buy-btn" style="margin-left: 2%;">Bet</a>
+                                                <!-- <a role="button" (click)="toDetails()" class="ticket-buy-btn">Details</a> -->
                                             </div>
                                         </div>
                                     </li>
@@ -287,12 +63,8 @@
                             <!--// Pagination \\-->
                             <div class="sportsmagazine-pagination">
                               <ul class="page-numbers">
-                                 <li><a class="previous page-numbers" href="404.html"><span aria-label="Next"><i class="fa fa-angle-left"></i></span></a></li>
-                                 <li><span class="page-numbers current">1</span></li>
-                                 <li><a class="page-numbers" href="404.html">2</a></li>
-                                 <li><a class="page-numbers" href="404.html">3</a></li>
-                                 <li><a class="page-numbers" href="404.html">4</a></li>
-                                 <li><a class="next page-numbers" href="404.html"><span aria-label="Next"><i class="fa fa-angle-right"></i></span></a></li>
+                                 <li><button class="previous page-numbers" (click)="paginate(-1)" ><span aria-label="Next"><i class="fa fa-angle-left"></i></span></button></li>
+                                 <li><button class="next page-numbers" (click)="paginate(1)" ><span aria-label="Next"><i class="fa fa-angle-right"></i></span></button></li>
                               </ul>
                             </div>
                             <!--// Pagination \\-->
@@ -317,4 +89,6 @@
 
 <app-register-modal></app-register-modal>
 
-<app-bet-modal></app-bet-modal>
+<app-bet-modal [match]="selectedMatch"></app-bet-modal>
+
+<app-loader *ngIf="loading"></app-loader>

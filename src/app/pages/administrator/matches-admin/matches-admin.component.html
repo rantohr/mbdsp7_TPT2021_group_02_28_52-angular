@@ -1,0 +1,64 @@
+<app-breadcomb-area [title]="'Games'" [description]="'Games of the season'"></app-breadcomb-area>
+
+<div class="container">
+    <div class="row" *ngIf="!formView">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="normal-table-list">
+                <div class="basic-tb-hd" style="display: flex; justify-content: space-between;">
+                    <h2>Games</h2>
+                    <button mat-mini-fab (click)="formView = !formView">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+                <div class="bsc-tbl">
+                    <table class="table table-sc-ex">
+                        <thead class="theader">
+                            <tr>
+                                <th>#</th>
+                                <th>Home</th>
+                                <th>Away</th>
+                                <th>Date</th>
+                                <th>City</th>
+                                <th>Stadium</th>
+                                <th>Result</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of games | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                                <td>{{ ((p-1)*10)+i+1 }}</td>
+                                <td>
+                                    <p>{{ item.NAME1 }} <b>({{ item.ODDS_HOME }})</b></p>
+                                    <img [src]="item.LOGO1" alt="" style="width: 5em; max-height: 5em; object-fit: cover;">
+                                </td>
+                                <td>
+                                    <p>{{ item.NAME2 }} <b>({{ item.ODDS_AWAY }})</b></p>
+                                    <img [src]="item.LOGO2" alt="" style="width: 5em; max-height: 5em; object-fit: cover;">
+                                </td>
+                                <td>{{ item.DATE_MATCH }}</td>
+                                <td>{{ item.CITY }}</td>
+                                <td>{{ item.STADIUM }}</td>
+                                <td>{{ item.SCORE }} | {{ !item.ID_WINNER ? 'draw' : (item.ID_WINNER == item.ID1 ? item.NAME1 : item.NAME2) }}</td>
+                                <td style="padding-top: 0;">
+                                    <button mat-mini-fab style="transform: scale(0.7);" (click)="selectItem(item)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                    <button mat-mini-fab style="transform: scale(0.7);" (click)="warningDialog(item)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="formView">
+        <app-game-form [data]="selectedItem" (formEvent)="receiveFormEvent($event)"></app-game-form>
+    </div>
+</div>
+
+<app-loader *ngIf="loading"></app-loader>

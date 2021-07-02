@@ -1,7 +1,4 @@
 <div class="form-example-wrap mg-t-30">
-    <div class="cmp-tb-hd cmp-int-hd">
-        <h2>Add Game</h2>
-    </div>
     
     <div class="row">
         <div class="col-lg-6">
@@ -13,7 +10,11 @@
                         </div>
                         <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
                             <div class="nk-int-st">
-                                <input type="text" class="form-control input-sm" placeholder="Enter A Team">
+
+                                <select [(ngModel)]="formData.home.id" [ngModelOptions]="{standalone: true}">
+                                    <option [value]="item.id" *ngFor="let item of teams">{{ item.name }}</option>
+                                </select>
+
                             </div>
                         </div>
                     </div>
@@ -26,11 +27,12 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-                            <label class="hrzn-fm"> Quote</label>
+                            <label class="hrzn-fm"> Odds</label>
                         </div>
                         <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
                             <div class="nk-int-st">
-                                <input type="number" class="form-control input-sm" placeholder="Enter A Quote">
+                                <input type="number" class="form-control input-sm" [(ngModel)]="formData.oddsHome"
+                                [ngModelOptions]="{standalone: true}" placeholder="Enter Odds">
                             </div>
                         </div>
                     </div>
@@ -50,7 +52,9 @@
                         </div>
                         <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
                             <div class="nk-int-st">
-                                <input type="text" class="form-control input-sm" placeholder="Enter A Team">
+                                <select [(ngModel)]="formData.away.id" [ngModelOptions]="{standalone: true}">
+                                    <option [value]="item.id" *ngFor="let item of teams">{{ item.name }}</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -63,11 +67,12 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-                            <label class="hrzn-fm"> Quote</label>
+                            <label class="hrzn-fm"> Odds</label>
                         </div>
                         <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
                             <div class="nk-int-st">
-                                <input type="number" class="form-control input-sm" placeholder="Enter A Quote">
+                                <input type="number" class="form-control input-sm" [(ngModel)]="formData.oddsAway"
+                                [ngModelOptions]="{standalone: true}"placeholder="Enter Odds">
                             </div>
                         </div>
                     </div>
@@ -81,11 +86,12 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-                    <label class="hrzn-fm">Result</label>
+                    <label class="hrzn-fm">Odds Draw</label>
                 </div>
                 <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
                     <div class="nk-int-st">
-                        <input type="text" class="form-control input-sm" placeholder="Enter The Result">
+                        <input type="text" class="form-control input-sm" [(ngModel)]="formData.oddsDraw"
+                        [ngModelOptions]="{standalone: true}" placeholder="Enter Odds">
                     </div>
                 </div>
             </div>
@@ -101,7 +107,9 @@
                 </div>
                 <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
                     <div class="nk-int-st">
-                        <input type="date" class="form-control input-sm" placeholder="Enter a Date">
+                        <input type="datetime-local" class="form-control input-sm" [ngModel]="formData.date | date:'yyyy-MM-ddTHH:mm'"
+                        (ngModelChange)="formData.date=$event"
+                        [ngModelOptions]="{standalone: true}" placeholder="Enter a Date">
                     </div>
                 </div>
             </div>
@@ -109,14 +117,48 @@
     </div>
     
     <br>
+    <div class="form-example-int form-horizental">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+                    <label class="hrzn-fm">Stadium</label>
+                </div>
+                <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
+                    <div class="nk-int-st">
+                        <input type="text" class="form-control input-sm" [(ngModel)]="formData.stadium"
+                        [ngModelOptions]="{standalone: true}" placeholder="Enter A Name">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <div class="form-example-int form-horizental">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+                    <label class="hrzn-fm">City</label>
+                </div>
+                <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
+                    <div class="nk-int-st">
+                        <input type="text" class="form-control input-sm" [(ngModel)]="formData.city"
+                        [ngModelOptions]="{standalone: true}" placeholder="Enter A City">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
     <div class="form-example-int mg-t-15">
         <div class="row">
             <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
             </div>
             <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
-                <button class="btn btn-default notika-btn-default waves-effect"
+                <button class="btn btn-default notika-btn-default waves-effect" (click)="cancel()"
                     style="margin-right: 2em;">Cancel</button>
-                <button class="btn btn-success notika-btn-success waves-effect">Submit</button>
+                <button class="btn btn-success notika-btn-success waves-effect" (click)="submit()">Submit</button>
             </div>
         </div>
     </div>

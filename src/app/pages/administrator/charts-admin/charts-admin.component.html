@@ -3,10 +3,10 @@
 <div class="container">
 
     <div style="display: flex; justify-content: space-between;">
-        <app-card-dashboard></app-card-dashboard>
-        <app-card-dashboard></app-card-dashboard>
-        <app-card-dashboard></app-card-dashboard>
-        <app-card-dashboard></app-card-dashboard>
+        <app-card-dashboard [data]="countG"></app-card-dashboard>
+        <app-card-dashboard [data]="countB"></app-card-dashboard>
+        <app-card-dashboard [data]="profit"></app-card-dashboard>
+        <app-card-dashboard [data]="moneyInGame"></app-card-dashboard>
     </div>
 
     <br>
@@ -27,7 +27,7 @@
             </div>
             <div class="search-eg-table">
                 <table class="table">
-                    <thead>
+                    <thead class="theader">
                         <tr>
                             <th>Work Flow</th>
                             <th class="text-right">Counter</th>
@@ -81,7 +81,7 @@
             </div>
             <div class="search-eg-table">
                 <table class="table">
-                    <thead>
+                    <thead class="theader">
                         <tr>
                             <th>Work Flow</th>
                             <th class="text-right">Counter</th>

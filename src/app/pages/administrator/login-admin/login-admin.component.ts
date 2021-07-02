@@ -17,6 +17,7 @@ export class LoginAdminComponent implements OnInit {
   };
 
   error = undefined;
+  loading = false;
 
   constructor(
     private service: AuthService,
@@ -51,12 +52,15 @@ export class LoginAdminComponent implements OnInit {
   }
 
   login(): void {
+    this.loading = true;
     this.error = undefined
     this.service.login(this.loginBody).subscribe(
       (res) => {
         if (res) {
+          this.loading = false;
           this.service.clearTokens();
           this.service.storeTokens(res.accessToken, res.refreshToken);
+          this.service.storeLoggedUserInfo(res)
           this.snackBar.openFromComponent(NotificationComponent, {
             duration: 4000,
             data: {
@@ -70,6 +74,7 @@ export class LoginAdminComponent implements OnInit {
         }
       },
       (err) => {
+        this.loading = false;
         this.error = this.errorMessageHandler.getSingleErrorMessage(err);
       }
     );

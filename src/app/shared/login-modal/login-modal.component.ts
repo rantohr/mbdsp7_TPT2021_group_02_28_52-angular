@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
 import { ErrorMessageHandler } from 'src/app/core/service/error-message-handler.service';
 import { NotificationComponent } from '../notification/notification.component';
@@ -15,11 +16,13 @@ export class LoginModalComponent implements OnInit {
   };
 
   error = undefined
+  loading = false;
 
   constructor(
     private service: AuthService,
     private snackBar: MatSnackBar,
-    private errorMessageHandler: ErrorMessageHandler
+    private errorMessageHandler: ErrorMessageHandler, 
+    public router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -50,12 +53,15 @@ export class LoginModalComponent implements OnInit {
   }
 
   login(): void {
+    this.loading = true;
     const closeBtns: any = document.getElementsByClassName('close-modal');
     this.service.login(this.loginBody).subscribe(
       (res) => {
         if (res) {
+          this.loading = false;
           this.service.clearTokens();
           this.service.storeTokens(res.accessToken, res.refreshToken);
+          this.service.storeLoggedUserInfo(res)
           this.snackBar.openFromComponent(NotificationComponent, {
             duration: 4000,
             data: {
@@ -68,18 +74,12 @@ export class LoginModalComponent implements OnInit {
           Array.from(closeBtns).forEach((e: any) => {
             e.click();
           });
+          this.router.navigate(['/fixtures']);
         }
       },
       (err) => {
         this.error = this.errorMessageHandler.getSingleErrorMessage(err)
-        // this.snackBar.openFromComponent(NotificationComponent, {
-        //   duration: 4000,
-        //   data: {
-        //     message: this.errorMessageHandler.getSingleErrorMessage(err),
-        //     type: 'error'
-        //   },
-        //   panelClass: ['error-snackbar']
-        // });
+        this.loading = false;
       }
     );
   }

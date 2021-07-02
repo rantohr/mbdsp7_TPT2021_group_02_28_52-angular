@@ -10,10 +10,12 @@ import { AuthService } from 'src/app/core/service/auth/auth.service';
 export class FrontHeaderComponent implements OnInit {
 
   navigationSubscription: any; 
+  loggedUser: any;
 
   constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.loggedUser = this.authService.getLoggedUserInfo()
   }
 
   toFixtures(): void {

@@ -32,53 +32,17 @@
                         <div class="sportsmagazine-fancy-title"><h2>Upcoming matches</h2></div>
                         <div class="widget widget_matches">
                             <ul>
-                                <li>
+                                <li *ngFor="let item of upcoming; let i = index;">
                                     <div class="sportsmagazine-team-one">
-                                        <h6><a href="fixture-detail.html">Ocean Kings</a></h6>
-                                        <span>St. Patrick’s</span>
+                                        <h6><a href="fixture-detail.html" style="pointer-events: none;">{{ item.NAME1 }}</a></h6>
+                                        <span>{{ item.ODDS_HOME }}</span>
                                     </div>
                                     <span>VS</span>
                                     <div class="sportsmagazine-team-two">
-                                        <h6><a href="fixture-detail.html">Bloody Wave</a></h6>
-                                        <span>Marine College</span>
+                                        <h6><a href="fixture-detail.html" style="pointer-events: none;">{{ item.NAME2 }}</a></h6>
+                                        <span>{{ item.ODDS_AWAY }}</span>
                                     </div>
-                                    <a role="button" (click)="toDetails()" class="ticket-buy-btn" style="margin-top: 0">Details</a>
-                                </li>
-                                <li>
-                                    <div class="sportsmagazine-team-one">
-                                        <h6><a href="fixture-detail.html">LA Pirates</a></h6>
-                                        <span>Bebop Institute</span>
-                                    </div>
-                                    <span>VS</span>
-                                    <div class="sportsmagazine-team-two">
-                                        <h6><a href="fixture-detail.html">Ocean Kings</a></h6>
-                                        <span>Marine College</span>
-                                    </div>
-                                    <a role="button" (click)="toDetails()" class="ticket-buy-btn" style="margin-top: 0">Details</a>
-                                </li>
-                                <li>
-                                    <div class="sportsmagazine-team-one">
-                                        <h6><a href="fixture-detail.html">Red Wings</a></h6>
-                                        <span>Marine College</span>
-                                    </div>
-                                    <span>VS</span>
-                                    <div class="sportsmagazine-team-two">
-                                        <h6><a href="fixture-detail.html">Lucky Clovers</a></h6>
-                                        <span>Elric Bros School</span>
-                                    </div>
-                                    <a role="button" (click)="toDetails()" class="ticket-buy-btn" style="margin-top: 0">Details</a>
-                                </li>
-                                <li>
-                                    <div class="sportsmagazine-team-one">
-                                        <h6><a href="fixture-detail.html">Draconians</a></h6>
-                                        <span>Atlantic School</span>
-                                    </div>
-                                    <span>VS</span>
-                                    <div class="sportsmagazine-team-two">
-                                        <h6><a href="fixture-detail.html">Bloody Wave</a></h6>
-                                        <span>Marine College</span>
-                                    </div>
-                                    <a role="button" (click)="toDetails()" class="ticket-buy-btn" style="margin-top: 0">Details</a>
+                                    <a *ngIf="loggedUser" role="button" data-toggle="modal" data-target="#betModal" (click)="selectMatch(item.ID)" class="ticket-buy-btn" style="margin-top: 0">Bet</a>
                                 </li>
                             </ul>
                         </div>
@@ -95,67 +59,13 @@
                                     <li>PTS</li>
                                 </ul>
                             </div>
-                            <div class="ranking-content-table">
+                            <div class="ranking-content-table" *ngFor="let item of teamsRanking; let i = index;">
                                 <ul class="ranking-content-row">
-                                    <li>1</li>
-                                    <li> <img src="assets/fo/extra-images/ranking-widget-flag-1.png" alt=""> <div class="ranking-logo"><span>L.A Pirates</span> <small>Bebop Institute</small> </div> </li>
-                                    <li>08</li>
-                                    <li>08</li>
-                                    <li>16</li>
-                                </ul>
-                            </div>
-                            <div class="ranking-content-table">
-                                <ul class="ranking-content-row">
-                                    <li>2</li>
-                                    <li> <img src="assets/fo/extra-images/ranking-widget-flag-2.png" alt=""> <div class="ranking-logo"><span>Ocean Kings</span> <small>Icarus College</small> </div> </li>
-                                    <li>08</li>
-                                    <li>07</li>
-                                    <li>14</li>
-                                </ul>
-                            </div>
-                            <div class="ranking-content-table">
-                                <ul class="ranking-content-row">
-                                    <li>3</li>
-                                    <li> <img src="assets/fo/extra-images/ranking-widget-flag-3.png" alt=""> <div class="ranking-logo"><span>Red Wings</span> <small>Marine College</small> </div> </li>
-                                    <li>07</li>
-                                    <li>07</li>
-                                    <li>14</li>
-                                </ul>
-                            </div>
-                            <div class="ranking-content-table">
-                                <ul class="ranking-content-row">
-                                    <li>4</li>
-                                    <li> <img src="assets/fo/extra-images/ranking-widget-flag-4.png" alt=""> <div class="ranking-logo"><span>Lucky Clovers</span> <small>Elric Bros School</small> </div> </li>
-                                    <li>07</li>
-                                    <li>06</li>
-                                    <li>12</li>
-                                </ul>
-                            </div>
-                            <div class="ranking-content-table">
-                                <ul class="ranking-content-row">
-                                    <li>5</li>
-                                    <li> <img src="assets/fo/extra-images/ranking-widget-flag-5.png" alt=""> <div class="ranking-logo"><span>Draconians</span> <small>Atlantic School</small> </div> </li>
-                                    <li>06</li>
-                                    <li>05</li>
-                                    <li>10</li>
-                                </ul>
-                            </div>
-                            <div class="ranking-content-table">
-                                <ul class="ranking-content-row">
-                                    <li>6</li>
-                                    <li> <img src="assets/fo/extra-images/ranking-widget-flag-6.png" alt=""> <div class="ranking-logo"><span>Bloody Wave</span> <small>Marine College</small> </div> </li>
-                                    <li>06</li>
-                                    <li>04</li>
-                                    <li>08</li>
-                                </ul>
-                            </div>
-                            <div class="ranking-content-table">
-                                <ul class="ranking-content-row">
-                                    <li>7</li>
-                                    <li> <img src="assets/fo/extra-images/ranking-widget-flag-7.png" alt=""> <div class="ranking-logo"><span>Ocean Kings</span> <small>St. Patrick’s Institute</small> </div> </li>
-                                    <li>06</li>
-                                    <li>04</li>
-                                    <li>08</li>
+                                    <li>{{ i+1 }}</li>
+                                    <li> <img [src]="item.LOGO" alt=""> <div class="ranking-logo"><span>{{ item.NAME }}</span></div> </li>
+                                    <li>{{ item.MATCHES }}</li>
+                                    <li>{{ item.WINS }}</li>
+                                    <li>{{ item.WINS*3 }}</li>
                                 </ul>
                             </div>
                         </div>
@@ -185,3 +95,7 @@
 <app-forget-modal></app-forget-modal>
 
 <app-reset-modal></app-reset-modal>
+
+<app-user-profil-modal></app-user-profil-modal>
+
+<app-bet-modal [match]="selectedMatch"></app-bet-modal>
