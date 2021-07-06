@@ -1,4 +1,5 @@
 import { AfterViewChecked, Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
 import { BetsService } from 'src/app/core/service/bets.service';
 
@@ -27,7 +28,7 @@ export class BetModalComponent implements OnInit, AfterViewChecked {
   updateMode = false
   old = undefined
 
-  constructor(private authService: AuthService, private betService: BetsService) { }
+  constructor(private router: Router, private authService: AuthService, private betService: BetsService) { }
 
   ngOnInit(): void {
 
@@ -75,9 +76,11 @@ export class BetModalComponent implements OnInit, AfterViewChecked {
       this.betService.update(this.form).subscribe(r => {
         if (r) {
           this.user.tokens = this.user.tokens + this.form.oldBet - this.form.bet
-          this.authService.storeLoggedUserInfo({user: this.user})
+          this.authService.storeLoggedUserInfo({ user: this.user })
           this.loading = false
           this.error = 'Bet successfully recorded'
+
+          this.router.navigate(['/home']);
         }
       }, (err) => {
         this.error = err
@@ -87,9 +90,11 @@ export class BetModalComponent implements OnInit, AfterViewChecked {
       this.betService.create(this.form).subscribe(r => {
         if (r) {
           this.user.tokens = this.user.tokens - this.form.bet
-          this.authService.storeLoggedUserInfo({user: this.user})
+          this.authService.storeLoggedUserInfo({ user: this.user })
           this.loading = false
           this.error = 'Bet successfully recorded'
+
+          this.router.navigate(['/home']);
         }
       }, (err) => {
         this.error = err

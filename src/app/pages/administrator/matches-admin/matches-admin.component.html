@@ -35,10 +35,10 @@
                                     <p>{{ item.NAME2 }} <b>({{ item.ODDS_AWAY }})</b></p>
                                     <img [src]="item.LOGO2" alt="" style="width: 5em; max-height: 5em; object-fit: cover;">
                                 </td>
-                                <td>{{ item.DATE_MATCH }}</td>
+                                <td>{{ item.DATE_MATCH | date: 'd-MMM-yy HH:mm' }}</td>
                                 <td>{{ item.CITY }}</td>
                                 <td>{{ item.STADIUM }}</td>
-                                <td>{{ item.SCORE }} | {{ !item.ID_WINNER ? 'draw' : (item.ID_WINNER == item.ID1 ? item.NAME1 : item.NAME2) }}</td>
+                                <td>{{ item.SCORE }} | {{  !item.SCORE ? '' : (!item.ID_WINNER ? 'draw' : (item.ID_WINNER == item.ID1 ? item.NAME1 : item.NAME2)) }}</td>
                                 <td style="padding-top: 0;">
                                     <button mat-mini-fab style="transform: scale(0.7);" (click)="selectItem(item)">
                                         <mat-icon>edit</mat-icon>

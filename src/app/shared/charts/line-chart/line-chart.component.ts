@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   Chart,
   ArcElement,
@@ -32,6 +32,8 @@ import {
 })
 export class LineChartComponent implements OnInit {
 
+  @Input() data
+
   constructor() {
     Chart.register(
       ArcElement,
@@ -60,24 +62,25 @@ export class LineChartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     var ctx: any = document.getElementById("linechartinterpolation");
     var linechartinterpolation = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ["0", "1", "2"],
+        labels: ["15", "25", "35"],
         datasets: [{
-          label: "Cubic interpolation",
+          label: "Female",
           fill: false,
           backgroundColor: '#ffdc11',
           borderColor: '#ffdc11',
-          data: [0, 15, 17, 30, 0, 12, -30, 5, 30, 8, 30, 12, 30],
+          data: [0, this.data.femaleU25, this.data.female],
           cubicInterpolationMode: 'monotone'
         }, {
-          label: "Cubic interpolation",
+          label: "Male",
           fill: false,
           backgroundColor: '#fb9678',
           borderColor: '#fb9678',
-          data: [-25, 30, 12, -30, 12, 30, 8, -30, 9, 30, -30, -12, -30]
+          data: [0, this.data.maleU25, this.data.male],
 
         }]
       },
@@ -90,8 +93,8 @@ export class LineChartComponent implements OnInit {
           yAxes: {
             display: true,
             ticks: {
-              minRotation: -30,
-              maxRotation: 30,
+              minRotation: 0,
+              maxRotation: 100,
             }
           }
         }

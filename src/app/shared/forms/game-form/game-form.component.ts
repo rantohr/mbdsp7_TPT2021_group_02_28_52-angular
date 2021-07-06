@@ -29,7 +29,7 @@ export class GameFormComponent implements OnInit {
 
   teams = [];
 
-  constructor(private service: GamesService) {}
+  constructor(private service: GamesService) { }
 
   ngOnInit(): void {
     this.service.getTeams().subscribe((teams) => {
@@ -38,23 +38,27 @@ export class GameFormComponent implements OnInit {
       }
     });
 
-    if (this.data && this.data.id) {
+    if (this.data && this.data.ID) {
 
       this.formData = {
-        id: this.data.id,
-        id_api: this.data.id_api | 0,
-        status: this.data.status ? this.data.status : 'NS',
-        date: this.data.date,
-        home: this.data.home,
-        away: this.data.away,
-        winner: this.data.winner,
-        stadium: this.data.stadium,
-        city: this.data.city,
-        lng: this.data.lng | 0,
-        lat: this.data.lat | 0,
-        oddsHome: this.data.oddsHome,
-        oddsAway: this.data.oddsAway,
-        oddsDraw: this.data.oddsDraw,
+        id: this.data.ID,
+        id_api: this.data.ID_API | 0,
+        status: this.data.STATUS ? this.data.STATUS : 'NS',
+        date: this.data.DATE_MATCH,
+        home: {
+          id: this.data.ID_HOME
+        },
+        away:  {
+          id: this.data.ID_AWAY
+        },
+        winner: this.data.ID_WINNER,
+        stadium: this.data.STADIUM,
+        city: this.data.CITY,
+        lng: this.data.LNG | 0,
+        lat: this.data.LAT | 0,
+        oddsHome: this.data.ODDS_HOME,
+        oddsAway: this.data.ODDS_AWAY,
+        oddsDraw: this.data.ODDS_DRAW,
       };
     }
   }

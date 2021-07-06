@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs/operators';
 import { GamesService } from 'src/app/core/service/games.service';
 
 @Component({
@@ -15,10 +16,18 @@ export class FixtureResultsComponent implements OnInit {
   constructor(private router: Router, private service: GamesService) { }
 
   ngOnInit(): void {
-    this.service.getWithFilter({ start: this.page*10, result: true }).subscribe((games) => {
+    this.loading = true
+    this.service.getWithFilter({ start: this.page * 10, result: true }).pipe(
+      tap(x => {
+        x.forEach(e => {
+          const date = new Date(e.DATE_MATCH.data[1], e.DATE_MATCH.data[2], e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
+          e.DATE_MATCH = date;
+        });
+      }),
+    ).subscribe((games) => {
       if (games) {
         this.games = games;
-        console.log("🚀 ~ file: fixture-results.component.ts ~ line 21 ~ FixtureResultsComponent ~ this.service.getWithFilter ~ this.games", this.games)
+        this.loading = false
       }
     });
   }
@@ -34,7 +43,14 @@ export class FixtureResultsComponent implements OnInit {
     } else {
       this.page = this.page + 1
     }
-    this.service.getWithFilter({ start: this.page*10 }).subscribe((games) => {
+    this.service.getWithFilter({ start: this.page * 10 }).pipe(
+      tap(x => {
+        x.forEach(e => {
+          const date = new Date(e.DATE_MATCH.data[1], e.DATE_MATCH.data[2], e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
+          e.DATE_MATCH = date;
+        });
+      }),
+    ).subscribe((games) => {
       if (games) {
         this.loading = false
         this.games = games;

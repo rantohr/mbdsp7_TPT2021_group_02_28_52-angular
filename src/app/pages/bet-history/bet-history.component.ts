@@ -12,14 +12,17 @@ export class BetHistoryComponent implements OnInit {
 
   history = []
 
+  loading = false
+  
   constructor(private router: Router, private authService: AuthService, private gamesService: GamesService) {}
 
   ngOnInit(): void {
+    this.loading = true
     const user = this.authService.getLoggedUserInfo();
     this.gamesService.getHistory({userID: user._id}).subscribe((res) => {
       if (res) {
         this.history = res
-        console.log("🚀 ~ file: bet-history.component.ts ~ line 22 ~ BetHistoryComponent ~ this.gamesService.getHistory ~ this.history", this.history)
+        this.loading = false
       }
     });
   }

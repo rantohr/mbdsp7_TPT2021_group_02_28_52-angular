@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   Chart,
   ArcElement,
@@ -32,6 +32,8 @@ import {
 })
 export class RadarChartComponent implements OnInit {
 
+  @Input() data
+
   constructor() {
     Chart.register(
       ArcElement,
@@ -60,14 +62,16 @@ export class RadarChartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const realData = [this.data.a, this.data.b, this.data.c, this.data.d, this.data.e]
+    
     var ctx: any = document.getElementById("radarChart");
     var radarChart = new Chart(ctx, {
       type: 'radar',
       data: {
-        labels: ['Running', 'Swimming', 'Eating', 'Cycling'],
+        labels: ['-18', '19 - 22', '23 - 26', '27 - 30', '+30'],
         datasets: [{
-          label: 'games',
-          data: [20, 10, 4, 2]
+          label: 'Gamblers by ages',
+          data: realData
         }]
       },
       options: {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { tap } from 'rxjs/operators';
 import { BetsService } from 'src/app/core/service/bets.service';
 import { ConfigsService } from 'src/app/core/service/configs.service';
 import { ErrorMessageHandler } from 'src/app/core/service/error-message-handler.service';
@@ -25,13 +26,14 @@ export class BetsAdminComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loading = true
     this.service.get().subscribe((conf) => {
       if (conf && conf.length) this.config = conf[0];
     });
     this.betsService.getJava().subscribe((bets) => {
       if (bets) {
         this.bets = bets;
-        console.log("🚀 ~ file: bets-admin.component.ts ~ line 34 ~ BetsAdminComponent ~ this.betsService.getJava ~ this.bets", this.bets)
+        this.loading = false
       }
     });
   }

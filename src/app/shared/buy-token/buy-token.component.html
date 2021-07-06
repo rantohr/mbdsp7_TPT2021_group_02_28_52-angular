@@ -1,0 +1,19 @@
+<!-- BetModal -->
+<div class="loginmodal modal fade" id="userBuyModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="sportsmagazine-login-box">
+            <h4 style="text-align: center;">Buy token here!</h4>
+            <form>
+                <input type="number" [(ngModel)]="form.value" [ngModelOptions]="{standalone: true}"
+                    placeholder="Enter amount">
+                <div class="clearfix"></div>
+                <input (click)="submit()" type="submit" value="Buy"
+                    class="sportsmagazine-bordercolor sportsmagazine-color" style="margin-left: 40%;">
+                <app-loader *ngIf="loading"></app-loader>
+            </form>
+            <br>
+            <p>{{ error }}</p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

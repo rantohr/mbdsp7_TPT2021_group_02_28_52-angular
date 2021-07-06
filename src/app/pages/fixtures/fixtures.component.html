@@ -51,7 +51,7 @@
                                             <div class="sportsmagazine-buy-ticket">
                                                 <div class="sportsmagazine-buy-ticket-text" style="margin-left: -5%;">
                                                     <h5>{{ item.STADIUM }}</h5>
-                                                    <time datetime="2008-02-14 20:00">{{ item.date | date }}<span>@ {{ item.date | date: 'HH:mm' }}</span></time>
+                                                    <time datetime="2008-02-14 20:00">{{ item.DATE_MATCH | date: 'd-MMM-yy' }}<span>@ {{ item.DATE_MATCH | date: 'HH:mm' }}</span></time>
                                                 </div>
                                                 <a data-toggle="modal" data-target="#betModal" (click)="selectMatch(item.ID)" class="ticket-buy-btn" style="margin-left: 2%;">Bet</a>
                                                 <!-- <a role="button" (click)="toDetails()" class="ticket-buy-btn">Details</a> -->
@@ -92,3 +92,11 @@
 <app-bet-modal [match]="selectedMatch"></app-bet-modal>
 
 <app-loader *ngIf="loading"></app-loader>
+
+<app-forget-modal></app-forget-modal>
+
+<app-reset-modal></app-reset-modal>
+
+<app-user-profil-modal></app-user-profil-modal>
+
+<app-buy-token></app-buy-token>

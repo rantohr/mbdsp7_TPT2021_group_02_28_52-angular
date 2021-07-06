@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   Chart,
   ArcElement,
@@ -32,6 +32,8 @@ import {
 })
 export class AreaChartComponent implements OnInit {
 
+  @Input() data
+
   constructor() {
     Chart.register(
       ArcElement,
@@ -64,13 +66,16 @@ export class AreaChartComponent implements OnInit {
     var areachartfillstart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ["January", "February", "March", "April"],
+        // labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        // labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov"],
         datasets: [{
-          label: "My First dataset",
+          label: "Mathes per Month",
           fill: 'start',
           backgroundColor: '#ffdc11',
           borderColor: '#ffdc11',
-          data: [0, 10, 20, 30]
+          data: this.data
+          // data: [1,10,1,1,1,1,1,1,1,1,1,1]
         }]
       },
       options: {
@@ -79,7 +84,7 @@ export class AreaChartComponent implements OnInit {
         spanGaps: false,
         elements: {
           line: {
-            tension: 0.000001
+            tension: 0.0001
           }
         },
         plugins: {

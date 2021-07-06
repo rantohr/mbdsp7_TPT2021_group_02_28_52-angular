@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { GamesService } from 'src/app/core/service/games.service';
 
 @Component({
@@ -11,15 +13,44 @@ export class FixturesComponent implements OnInit {
 
   loading = false
   games = []
-  page = 1
+  page = 0
   selectedMatch = undefined
+  search: string = '';
 
-  constructor(private router: Router, private service: GamesService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private service: GamesService) { }
 
   ngOnInit(): void {
-    this.service.getWithFilter({ upcoming: true, start: this.page*10 }).subscribe((games) => {
+
+    this.route.queryParams.subscribe(p => {
+      this.search = p.search ? p.search : ""
+      this.loading = true
+      this.service.getWithFilter({ upcoming: true, start: this.page * 10, search: this.search }).pipe(
+        tap(x => {
+          x.forEach(e => {
+            const date = new Date(e.DATE_MATCH.data[1], e.DATE_MATCH.data[2], e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
+            e.DATE_MATCH = date;
+          });
+        }),
+      ).subscribe((games) => {
+        if (games) {
+          this.games = games;
+          this.loading = false
+        }
+      });
+    });
+
+    this.loading = true
+    this.service.getWithFilter({ upcoming: true, start: this.page * 10, search: this.search }).pipe(
+      tap(x => {
+        x.forEach(e => {
+          const date = new Date(e.DATE_MATCH.data[1], e.DATE_MATCH.data[2], e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
+          e.DATE_MATCH = date;
+        });
+      }),
+    ).subscribe((games) => {
       if (games) {
         this.games = games;
+        this.loading = false
       }
     });
   }
@@ -35,7 +66,14 @@ export class FixturesComponent implements OnInit {
     } else {
       this.page = this.page + 1
     }
-    this.service.getWithFilter({ upcoming: true, start: this.page*10 }).subscribe((games) => {
+    this.service.getWithFilter({ upcoming: true, start: this.page * 10, search: this.search }).pipe(
+      tap(x => {
+        x.forEach(e => {
+          const date = new Date(e.DATE_MATCH.data[1], e.DATE_MATCH.data[2], e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
+          e.DATE_MATCH = date;
+        });
+      }),
+    ).subscribe((games) => {
       if (games) {
         this.loading = false
         this.games = games;

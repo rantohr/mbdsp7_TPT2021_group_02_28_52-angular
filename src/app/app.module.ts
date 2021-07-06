@@ -49,6 +49,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { UserProfilModalComponent } from './shared/user-profil-modal/user-profil-modal.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { BuyTokenComponent } from './shared/buy-token/buy-token.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NotificationComponent,
     LoaderComponent,
     UserProfilModalComponent,
+    BuyTokenComponent,
   ],
   imports: [
     BrowserModule,

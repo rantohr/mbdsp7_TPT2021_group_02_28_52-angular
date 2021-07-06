@@ -27,17 +27,17 @@
                                 <div class="sportsmagazine-modren-fixture-text">
                                     <div class="sportsmagazine-modren-team-one">
                                         <figure style="margin-top: -20%"><img
-                                                [src]="item.LOGO" alt="">
+                                                [src]="item.LOGO1" alt="">
                                         </figure>
                                         <section>
-                                            <h6>{{ item.NAME }}</h6>
+                                            <h6>{{ item.NAME1 }}</h6>
                                             <span style="font-size: xxx-large; margin-top: 10%;">{{ item.SCORE.split('-')[0] }}</span>
                                         </section>
                                         <span></span>
                                     </div>
                                     <div class="sportsmagazine-modren-match-text">
                                         <h5>Result Match</h5>
-                                        <time datetime="2008-02-14 20:00">August 21st, 2017</time>
+                                        <time datetime="2008-02-14 20:00">{{ item.DATE_MATCH | date: 'd-MMM-yy HH:mm' }}</time>
                                         <div class="clearfix"></div>
                                         <span>VS</span>
                                         <h6>{{ item.STADIUM }}</h6>
@@ -88,3 +88,11 @@
 <app-register-modal></app-register-modal>
 
 <app-loader *ngIf="loading"></app-loader>
+
+<app-forget-modal></app-forget-modal>
+
+<app-reset-modal></app-reset-modal>
+
+<app-user-profil-modal></app-user-profil-modal>
+
+<app-buy-token></app-buy-token>

@@ -11,6 +11,10 @@
                             <i class="fa fa-user"></i>
                             <a id="userProfilBtn" href="#" data-toggle="modal" data-target="#userProfilModal">Account</a>
                         </li>
+                        <li *ngIf="loggedUser">
+                            <i class="fa fa-money"></i>
+                            <a id="userBuyBtn" href="#" data-toggle="modal" data-target="#userBuyModal">Buy token</a>
+                        </li>
                     </ul>
                 </aside>
                 <aside class="col-md-8">
@@ -39,7 +43,7 @@
         <div class="container">
             <div class="row">
                 <aside class="col-md-2"><a href="index-2.html" class="sportsmagazine-logo"><img
-                            src="assets/image/logo-1.png" alt=""></a></aside>
+                            src="assets/image/logo.png" alt=""></a></aside>
                 <div class="col-md-10">
                     <div class="sportsmagazine-right-section">
                         <nav class="navbar navbar-default">

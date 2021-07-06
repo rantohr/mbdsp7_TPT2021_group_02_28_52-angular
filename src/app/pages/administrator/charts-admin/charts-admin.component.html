@@ -11,117 +11,55 @@
 
     <br>
     <div style="display: flex; justify-content: space-between;">
-        <app-area-chart></app-area-chart>
-        <app-radar-chart></app-radar-chart>
+        <app-area-chart *ngIf="gamesPerM && gamesPerM.length" [data]="gamesPerM"></app-area-chart>
+        <app-radar-chart *ngIf="gamblerByAge" [data]="gamblerByAge"></app-radar-chart>
     </div>
 
     <br>
-    <app-line-chart></app-line-chart>
+    <app-line-chart *ngIf="gamblersByGender" [data]="gamblersByGender"></app-line-chart>
 
     <br>
     <div style="display: flex; justify-content: space-between;">
-        <div class="search-engine-int sm-res-mg-t-30 tb-res-mg-t-30 tb-res-ds-n dk-res-ds">
+        <div class="search-engine-int sm-res-mg-t-30 tb-res-mg-t-30 tb-res-ds-n dk-res-ds" style="width: 50%;">
             <div class="contact-hd search-hd-eg">
-                <h2>Site Performance</h2>
-                <p>Fusce eget dolor id justo luctus commodo vel pharetra nisi. Donec velit libero</p>
+                <h2>Richest Gamblers</h2>
             </div>
             <div class="search-eg-table">
                 <table class="table">
                     <thead class="theader">
                         <tr>
-                            <th>Work Flow</th>
-                            <th class="text-right">Counter</th>
+                            <th>User</th>
+                            <th class="text-right">Money</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>External Backlinks</td>
+                        <tr *ngFor="let item of richestGamblers; let i = index;">
+                            <td>{{ item.name }}</td>
                             <td class="text-right">
-                                <h4>54,302</h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Page Speed Score</td>
-                            <td class="text-right">
-                                <h4>87</h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Citation Flow</td>
-                            <td class="text-right">
-                                <h4>987</h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Mozrank</td>
-                            <td class="text-right">
-                                <h4>9.43</h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Domain Authority</td>
-                            <td class="text-right">
-                                <h4>455</h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="analysis-rd-mg">Alexa Rank</td>
-                            <td class="text-right analysis-rd-mg">
-                                <h4>342,234</h4>
+                                <h4>{{ item.money.toFixed(2) }}$</h4>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="search-engine-int sm-res-mg-t-30 tb-res-mg-t-30 tb-res-ds-n dk-res-ds">
+        <div class="search-engine-int sm-res-mg-t-30 tb-res-mg-t-30 tb-res-ds-n dk-res-ds" style="width: 50%;">
             <div class="contact-hd search-hd-eg">
-                <h2>Site Performance</h2>
-                <p>Fusce eget dolor id justo luctus commodo vel pharetra nisi. Donec velit libero</p>
+                <h2>Profit per user</h2>
             </div>
             <div class="search-eg-table">
                 <table class="table">
                     <thead class="theader">
                         <tr>
-                            <th>Work Flow</th>
-                            <th class="text-right">Counter</th>
+                            <th>User</th>
+                            <th class="text-right">Profit</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>External Backlinks</td>
+                        <tr *ngFor="let item of profitPerUser; let i = index;">
+                            <td>{{ item.USERNAME }}</td>
                             <td class="text-right">
-                                <h4>54,302</h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Page Speed Score</td>
-                            <td class="text-right">
-                                <h4>87</h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Citation Flow</td>
-                            <td class="text-right">
-                                <h4>987</h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Mozrank</td>
-                            <td class="text-right">
-                                <h4>9.43</h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Domain Authority</td>
-                            <td class="text-right">
-                                <h4>455</h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="analysis-rd-mg">Alexa Rank</td>
-                            <td class="text-right analysis-rd-mg">
-                                <h4>342,234</h4>
+                                <h4>{{ item.TOTAL_MONEY.toFixed(2) }}$</h4>
                             </td>
                         </tr>
                     </tbody>
@@ -130,3 +68,5 @@
         </div>
     </div>
 </div>
+
+<app-loader *ngIf="loading"></app-loader>

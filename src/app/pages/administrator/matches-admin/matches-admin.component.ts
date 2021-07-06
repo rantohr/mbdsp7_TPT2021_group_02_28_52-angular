@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { tap } from 'rxjs/operators';
 import { ErrorMessageHandler } from 'src/app/core/service/error-message-handler.service';
 import { GamesService } from 'src/app/core/service/games.service';
 import Swal from 'sweetalert2';
@@ -21,11 +22,22 @@ export class MatchesAdminComponent implements OnInit {
     private service: GamesService,
     private snackBar: MatSnackBar,
     private errorMessageHandler: ErrorMessageHandler
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.service.getWithFilter({limit: 20000}).subscribe((games) => {
-      if (games) this.games = games;
+    this.loading = true
+    this.service.getWithFilter({ limit: 20000 }).pipe(
+      tap(x => {
+        x.forEach(e => {
+          const date = new Date(e.DATE_MATCH.data[1], e.DATE_MATCH.data[2], e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
+          e.DATE_MATCH = date;
+        });
+      }),
+    ).subscribe((games) => {
+      if (games) {
+        this.games = games;
+        this.loading = false
+      }
     });
   }
 
@@ -40,12 +52,10 @@ export class MatchesAdminComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.loading = true;
-        this.service.delete(games.id).subscribe(
+        this.service.delete(games.ID).subscribe(
           (res) => {
-          console.log("🚀 ~ file: matches-admin.component.ts ~ line 44 ~ MatchesAdminComponent ~ warningDialog ~ res", res)
             if (res == null) {
               this.loading = false;
-              console.log("🚀 ~ file: matches-admin.component.ts ~ line 46 ~ MatchesAdminComponent ~ warningDialog ~ this.loading", this.loading)
               Swal.fire({
                 position: 'bottom',
                 icon: 'success',
@@ -53,7 +63,14 @@ export class MatchesAdminComponent implements OnInit {
                 showConfirmButton: false,
                 timer: 1500,
               });
-              this.service.get().subscribe((games) => {
+              this.service.getWithFilter({ limit: 20000 }).pipe(
+                tap(x => {
+                  x.forEach(e => {
+                    const date = new Date(e.DATE_MATCH.data[1], e.DATE_MATCH.data[2], e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
+                    e.DATE_MATCH = date;
+                  });
+                }),
+              ).subscribe((games) => {
                 if (games) this.games = games;
               });
             }
@@ -63,7 +80,7 @@ export class MatchesAdminComponent implements OnInit {
             Swal.fire({
               position: 'bottom',
               icon: 'error',
-              title: this.errorMessageHandler.getSingleErrorMessage(err),
+              title: 'You cannot delete this match because some people already bet on it',
               showConfirmButton: false,
               timer: 3000,
             });
@@ -87,61 +104,75 @@ export class MatchesAdminComponent implements OnInit {
       this.loading = true;
       !event.id
         ? this.service.create(event).subscribe(
-            (res) => {
-              if (res) {
-                this.loading = false;
-                Swal.fire({
-                  position: 'bottom',
-                  icon: 'success',
-                  title: 'games added successfully',
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-                this.formView = !this.formView;
-                this.service.get().subscribe((games) => {
-                  if (games) this.games = games;
-                });
-              }
-            },
-            (err) => {
+          (res) => {
+            if (res) {
               this.loading = false;
               Swal.fire({
                 position: 'bottom',
-                icon: 'error',
-                title: this.errorMessageHandler.getSingleErrorMessage(err),
+                icon: 'success',
+                title: 'games added successfully',
                 showConfirmButton: false,
-                timer: 3000,
+                timer: 1500,
+              });
+              this.formView = !this.formView;
+              this.service.getWithFilter({ limit: 20000 }).pipe(
+                tap(x => {
+                  x.forEach(e => {
+                    const date = new Date(e.DATE_MATCH.data[1], e.DATE_MATCH.data[2], e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
+                    e.DATE_MATCH = date;
+                  });
+                }),
+              ).subscribe((games) => {
+                if (games) this.games = games;
               });
             }
-          )
+          },
+          (err) => {
+            this.loading = false;
+            Swal.fire({
+              position: 'bottom',
+              icon: 'error',
+              title: this.errorMessageHandler.getSingleErrorMessage(err),
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          }
+        )
         : this.service.update(event).subscribe(
-            (res) => {
-              if (res) {
-                this.loading = false;
-                Swal.fire({
-                  position: 'bottom',
-                  icon: 'success',
-                  title: 'games updated successfully',
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-                this.formView = !this.formView;
-                this.service.get().subscribe((games) => {
-                  if (games) this.games = games;
-                });
-              }
-            },
-            (err) => {
+          (res) => {
+            if (res) {
               this.loading = false;
               Swal.fire({
                 position: 'bottom',
-                icon: 'error',
-                title: this.errorMessageHandler.getSingleErrorMessage(err),
+                icon: 'success',
+                title: 'games updated successfully',
                 showConfirmButton: false,
-                timer: 3000,
+                timer: 1500,
+              });
+              this.formView = !this.formView;
+              this.service.getWithFilter({ limit: 20000 }).pipe(
+                tap(x => {
+                  x.forEach(e => {
+                    const date = new Date(e.DATE_MATCH.data[1], e.DATE_MATCH.data[2], e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
+                    e.DATE_MATCH = date;
+                  });
+                }),
+              ).subscribe((games) => {
+                if (games) this.games = games;
               });
             }
-          );
+          },
+          (err) => {
+            this.loading = false;
+            Swal.fire({
+              position: 'bottom',
+              icon: 'error',
+              title: this.errorMessageHandler.getSingleErrorMessage(err),
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          }
+        );
     }
     this.selectedItem = undefined;
   }

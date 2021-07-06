@@ -21,11 +21,15 @@ export class UsersAdminComponent implements OnInit {
     private service: UsersService,
     private snackBar: MatSnackBar,
     private errorMessageHandler: ErrorMessageHandler
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+    this.loading = true
     this.service.get().subscribe((users) => {
-      if (users) this.users = users;
+      if (users) {
+        this.users = users;
+        this.loading = false
+      }
     });
   }
 
@@ -85,61 +89,61 @@ export class UsersAdminComponent implements OnInit {
       this.loading = true;
       !event._id
         ? this.service.create(event).subscribe(
-            (res) => {
-              if (res) {
-                this.loading = false;
-                Swal.fire({
-                  position: 'bottom',
-                  icon: 'success',
-                  title: 'User added successfully',
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-                this.formView = !this.formView;
-                this.service.get().subscribe((users) => {
-                  if (users) this.users = users;
-                });
-              }
-            },
-            (err) => {
+          (res) => {
+            if (res) {
               this.loading = false;
               Swal.fire({
                 position: 'bottom',
-                icon: 'error',
-                title: this.errorMessageHandler.getSingleErrorMessage(err),
+                icon: 'success',
+                title: 'User added successfully',
                 showConfirmButton: false,
-                timer: 3000,
+                timer: 1500,
+              });
+              this.formView = !this.formView;
+              this.service.get().subscribe((users) => {
+                if (users) this.users = users;
               });
             }
-          )
+          },
+          (err) => {
+            this.loading = false;
+            Swal.fire({
+              position: 'bottom',
+              icon: 'error',
+              title: this.errorMessageHandler.getSingleErrorMessage(err),
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          }
+        )
         : this.service.update(event).subscribe(
-            (res) => {
-              if (res) {
-                this.loading = false;
-                Swal.fire({
-                  position: 'bottom',
-                  icon: 'success',
-                  title: 'User updated successfully',
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-                this.formView = !this.formView;
-                this.service.get().subscribe((users) => {
-                  if (users) this.users = users;
-                });
-              }
-            },
-            (err) => {
+          (res) => {
+            if (res) {
               this.loading = false;
               Swal.fire({
                 position: 'bottom',
-                icon: 'error',
-                title: this.errorMessageHandler.getSingleErrorMessage(err),
+                icon: 'success',
+                title: 'User updated successfully',
                 showConfirmButton: false,
-                timer: 3000,
+                timer: 1500,
+              });
+              this.formView = !this.formView;
+              this.service.get().subscribe((users) => {
+                if (users) this.users = users;
               });
             }
-          );
+          },
+          (err) => {
+            this.loading = false;
+            Swal.fire({
+              position: 'bottom',
+              icon: 'error',
+              title: this.errorMessageHandler.getSingleErrorMessage(err),
+              showConfirmButton: false,
+              timer: 3000,
+            });
+          }
+        );
     }
     this.selectedItem = undefined;
   }
