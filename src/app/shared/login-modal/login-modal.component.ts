@@ -61,7 +61,7 @@ export class LoginModalComponent implements OnInit {
           this.loading = false;
           this.service.clearTokens();
           this.service.storeTokens(res.accessToken, res.refreshToken);
-          this.service.storeLoggedUserInfo(res)
+          this.service.storeLoggedUserInfo({ user: res.user })
           this.snackBar.openFromComponent(NotificationComponent, {
             duration: 4000,
             data: {

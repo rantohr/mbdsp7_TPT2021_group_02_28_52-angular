@@ -34,6 +34,10 @@ export class FrontHeaderComponent implements OnInit {
     this.router.navigate(['/history']);
   }
 
+  toStats(): void {
+    this.router.navigate(['/stats']);
+  }
+
   signout(): void {
     this.authService.clearTokens()
     this.router.navigate(['/home']);

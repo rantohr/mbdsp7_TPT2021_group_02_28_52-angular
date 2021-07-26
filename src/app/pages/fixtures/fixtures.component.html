@@ -1,87 +1,142 @@
-<div class="sportsmagazine-main-wrapper">
+<ng-sidenav-container>
+    <ng-sidenav [ngStyle]="{'display': isExpanded ? 'block' : 'none'}" [expanded]="isExpanded" [drawerState]="state"
+        [drawerWidth]="'250px'" [color]="'#27282a'">
 
-    <app-front-header></app-front-header>
+        <div style="margin: 8em 2em;">
+            <h2 style="color: white;">Filter</h2>
+            <br>
+            <label for="">Teams: </label>
+            <input type="text" placeholder="teams" [(ngModel)]="filterForm.search" [ngModelOptions]="{standalone: true}">
+            <div style="height: 1em;"></div>
+            <label for="">City: </label>
+            <input type="text" placeholder="city" [(ngModel)]="filterForm.city" [ngModelOptions]="{standalone: true}">
+            <div style="height: 1em;"></div>
+            <label for="">Odds: </label>
+            <input type="number" step="0.1" min="0" max="100" placeholder="min odds" [(ngModel)]="filterForm.minOdds" [ngModelOptions]="{standalone: true}">
+            <div style="height: 1em;"></div>
+            <input type="number" step="0.1" min="0" max="100" placeholder="max odds" [(ngModel)]="filterForm.maxOdds" [ngModelOptions]="{standalone: true}">
+            <div style="height: 1.5em;"></div>
+            <label for="">Dates: </label>
+            <input type="date" placeholder="date min" [(ngModel)]="filterForm.d1" [ngModelOptions]="{standalone: true}">
+            <label for="">to</label>
+            <input type="date" placeholder="date max" [(ngModel)]="filterForm.d2" [ngModelOptions]="{standalone: true}">
+            <div style="height: 1em;"></div>
+            <label>
+                <input type="submit" (click)="filter()" value="Submit"
+                    class="sportsmagazine-bordercolor sportsmagazine-color" 
+                    style="background-color: black; width: 5em; height: 3em;"></label>
+        </div>
 
-    <!--// SubHeader \\-->
-    <div class="sportsmagazine-subheader">
-        <span class="subheader-transparent"></span>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1>Fixtures</h1>
+    </ng-sidenav>
+    <ng-sidenav-content style="padding: 0;">
+        <div class="sportsmagazine-main-wrapper">
+
+            <app-front-header></app-front-header>
+
+            <!--// SubHeader \\-->
+            <div class="sportsmagazine-subheader">
+                <span class="subheader-transparent"></span>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1>Fixtures</h1>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!--// SubHeader \\-->
+            <!--// SubHeader \\-->
 
-    <!--// Main Content \\-->
-		<div class="sportsmagazine-main-content">
+            <!--// Main Content \\-->
+            <div class="sportsmagazine-main-content">
 
-			<!--// Main Section \\-->
-			<div class="sportsmagazine-main-section sportsmagazine-fixture-listfull">
-				<div class="container">
-					<div class="row">
-						
-						<div class="col-md-12">
-                            <div class="sportsmagazine-fixture sportsmagazine-fixture-list">
-                                <ul class="row">
-                                    <li class="col-md-12" *ngFor="let item of games; let i = index">
-                                        <div class="sportsmagazine-fixture-wrap">
-                                            <div class="sportsmagazine-teams-match">
-                                                <div class="sportsmagazine-first-team">
-                                                    <img [src]="item.LOGO1" alt="" style="width: 4em; height: 4em; object-fit: cover;">
-                                                    <div class="sportsmagazine-first-team-info">
-                                                        <h6>{{ item.NAME1 }}</h6>
-                                                        <span style="font-size: x-large; ">x{{ item.ODDS_HOME }}</span>
+                <!--// Main Section \\-->
+                <div class="sportsmagazine-main-section sportsmagazine-fixture-listfull">
+                    <div class="container">
+                        <button (click)="toggleSidenav()" class="ticket-buy-btn"
+                            style="float: right; height: 3em; margin-bottom: 5em;">
+                            Filter
+                            <i class="fa fa-filter" aria-hidden="true"></i>
+                        </button>
+                        <div class="clearfix"></div>
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="sportsmagazine-fixture sportsmagazine-fixture-list">
+                                    <ul class="row">
+                                        <li class="col-md-12" *ngFor="let item of games; let i = index">
+                                            <div class="sportsmagazine-fixture-wrap">
+                                                <div class="sportsmagazine-teams-match">
+                                                    <div class="sportsmagazine-first-team">
+                                                        <img [src]="item.LOGO1" alt=""
+                                                            style="width: 4em; height: 4em; object-fit: cover;">
+                                                        <div class="sportsmagazine-first-team-info">
+                                                            <h6>{{ item.NAME1 }}</h6>
+                                                            <span style="font-size: x-large; ">x{{ item.ODDS_HOME
+                                                                }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="sportsmagazine-match-view">
+                                                        <h5>Match</h5>
+                                                        <span>VS</span>
+                                                    </div>
+                                                    <div class="sportsmagazine-second-team">
+                                                        <img [src]="item.LOGO2" alt=""
+                                                            style="width: 4em; height: 4em; object-fit: cover;">
+                                                        <div class="sportsmagazine-second-team-info">
+                                                            <h6>{{ item.NAME2 }}</h6>
+                                                            <span style="font-size: x-large;">x{{ item.ODDS_AWAY
+                                                                }}</span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="sportsmagazine-match-view">
-                                                    <h5>Match</h5>
-                                                    <span>VS</span>
-                                                </div>
-                                                <div class="sportsmagazine-second-team">
-                                                    <img [src]="item.LOGO2" alt="" style="width: 4em; height: 4em; object-fit: cover;">
-                                                    <div class="sportsmagazine-second-team-info">
-                                                        <h6>{{ item.NAME2 }}</h6>
-                                                        <span style="font-size: x-large;">x{{ item.ODDS_AWAY }}</span>
+                                                <div class="sportsmagazine-buy-ticket">
+                                                    <div class="sportsmagazine-buy-ticket-text"
+                                                        style="margin-left: -5%;">
+                                                        <h5>{{ item.STADIUM }}</h5>
+                                                        <time datetime="2008-02-14 20:00">{{ item.DATE_MATCH | date:
+                                                            'd-MMM-yy'
+                                                            }}<span>@ {{ item.DATE_MATCH | date: 'HH:mm'
+                                                                }}</span></time>
+                                                                <br>
+                                                                <p><b>City: </b>{{ item.CITY }}</p>
                                                     </div>
+                                                    <a data-toggle="modal" data-target="#betModal"
+                                                        (click)="selectMatch(item.ID)" class="ticket-buy-btn"
+                                                        style="margin-left: 2%;">Bet</a>
+                                                    <!-- <a role="button" (click)="toDetails()" class="ticket-buy-btn">Details</a> -->
                                                 </div>
                                             </div>
-                                            <div class="sportsmagazine-buy-ticket">
-                                                <div class="sportsmagazine-buy-ticket-text" style="margin-left: -5%;">
-                                                    <h5>{{ item.STADIUM }}</h5>
-                                                    <time datetime="2008-02-14 20:00">{{ item.DATE_MATCH | date: 'd-MMM-yy' }}<span>@ {{ item.DATE_MATCH | date: 'HH:mm' }}</span></time>
-                                                </div>
-                                                <a data-toggle="modal" data-target="#betModal" (click)="selectMatch(item.ID)" class="ticket-buy-btn" style="margin-left: 2%;">Bet</a>
-                                                <!-- <a role="button" (click)="toDetails()" class="ticket-buy-btn">Details</a> -->
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--// Pagination \\-->
+                                <div class="sportsmagazine-pagination">
+                                    <ul class="page-numbers">
+                                        <li><button class="previous page-numbers" (click)="paginate(-1)"><span
+                                                    aria-label="Next"><i class="fa fa-angle-left"></i></span></button>
+                                        </li>
+                                        <li><button class="next page-numbers" (click)="paginate(1)"><span
+                                                    aria-label="Next"><i class="fa fa-angle-right"></i></span></button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--// Pagination \\-->
                             </div>
-                            <!--// Pagination \\-->
-                            <div class="sportsmagazine-pagination">
-                              <ul class="page-numbers">
-                                 <li><button class="previous page-numbers" (click)="paginate(-1)" ><span aria-label="Next"><i class="fa fa-angle-left"></i></span></button></li>
-                                 <li><button class="next page-numbers" (click)="paginate(1)" ><span aria-label="Next"><i class="fa fa-angle-right"></i></span></button></li>
-                              </ul>
-                            </div>
-                            <!--// Pagination \\-->
+
+
                         </div>
+                    </div>
+                </div>
+                <!--// Main Section \\-->
 
+            </div>
+            <!--// Main Content \\-->
 
-					</div>
-				</div>
-			</div>
-			<!--// Main Section \\-->
-
-		</div>
-		<!--// Main Content \\-->
-
-    <app-front-footer></app-front-footer>
-    <div class="clearfix"></div>
-</div>
+            <app-front-footer></app-front-footer>
+            <div class="clearfix"></div>
+        </div>
+    </ng-sidenav-content>
+</ng-sidenav-container>
 
 <app-search-modal></app-search-modal>
 

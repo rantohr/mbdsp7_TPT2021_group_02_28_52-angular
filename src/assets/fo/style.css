@@ -2634,7 +2634,10 @@ ul li:last-child .sportsmagazine-blog-list-wrap {
     margin: 0px 0px 0px -9px;
 }
 .sportsmagazine-team-one,.sportsmagazine-team-two { float: left;}
-.sportsmagazine-team-one { margin: 0px 17px 0px 0px;}
+.sportsmagazine-team-one { 
+    margin: 0px 17px 0px 0px;
+    min-width: 7em;
+}
 .sportsmagazine-team-two { margin: 0px 0px 0px 17px;}
 .sportsmagazine-team-one h6,.sportsmagazine-team-two h6 {
     font-size: 13px;
@@ -2643,7 +2646,7 @@ ul li:last-child .sportsmagazine-blog-list-wrap {
     line-height: 1;
 }
 .sportsmagazine-team-one > span,.sportsmagazine-team-two > span {
-    float: right;
+    /* float: right; */
     font-size: 10px;
     line-height: 1;
 }

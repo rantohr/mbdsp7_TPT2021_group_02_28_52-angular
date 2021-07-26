@@ -9,7 +9,8 @@
                     <ul class="sportsmagazine-user-section">
                         <li *ngIf="loggedUser">
                             <i class="fa fa-user"></i>
-                            <a id="userProfilBtn" href="#" data-toggle="modal" data-target="#userProfilModal">Account</a>
+                            <a id="userProfilBtn" href="#" data-toggle="modal"
+                                data-target="#userProfilModal">Account</a>
                         </li>
                         <li *ngIf="loggedUser">
                             <i class="fa fa-money"></i>
@@ -66,6 +67,8 @@
                                             (click)="toResults()">RESULTS</a></li>
                                     <li class="sportsmagazine-megamenu-li"><a role="button"
                                             (click)="toHistory()">HISTORY</a></li>
+                                    <li class="sportsmagazine-megamenu-li"><a role="button"
+                                            (click)="toStats()">STATS</a></li>
                                 </ul>
                             </div>
                         </nav>

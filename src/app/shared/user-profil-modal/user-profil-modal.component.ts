@@ -54,7 +54,7 @@ export class UserProfilModalComponent implements OnInit, AfterViewInit {
           });
 
           this.editMode = false;
-          this.authService.storeLoggedUserInfo(res)
+          this.authService.storeLoggedUserInfo({ user: res.user })
           const qrDiv: any = document.getElementById('qrCodeProfile');
           if (qrDiv) {
             qrDiv.innerHTML = res.qrCode;

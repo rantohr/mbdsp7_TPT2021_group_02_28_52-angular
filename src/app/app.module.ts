@@ -50,6 +50,8 @@ import { LoaderComponent } from './shared/loader/loader.component';
 import { UserProfilModalComponent } from './shared/user-profil-modal/user-profil-modal.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BuyTokenComponent } from './shared/buy-token/buy-token.component';
+import { StatsComponent } from './pages/stats/stats.component';
+import { SidenavModule } from 'angular-ng-sidenav';
 
 @NgModule({
   declarations: [
@@ -90,6 +92,7 @@ import { BuyTokenComponent } from './shared/buy-token/buy-token.component';
     LoaderComponent,
     UserProfilModalComponent,
     BuyTokenComponent,
+    StatsComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,7 +104,8 @@ import { BuyTokenComponent } from './shared/buy-token/buy-token.component';
     MatSnackBarModule,
     FormsModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    SidenavModule
   ],
   providers: [
     AuthService,

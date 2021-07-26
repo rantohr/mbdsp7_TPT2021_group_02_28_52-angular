@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
 import { GamesService } from 'src/app/core/service/games.service';
 import { NewsService } from 'src/app/core/service/news.service';
@@ -13,6 +14,7 @@ export class HomeComponent implements OnInit {
   news = []
   upcoming = []
   teamsRanking = []
+  results = []
   selectedMatch = undefined
   loggedUser = undefined
 
@@ -39,6 +41,20 @@ export class HomeComponent implements OnInit {
     this.gamesService.getTop().subscribe((res) => {
       if (res) {
         this.teamsRanking = res.slice(0,10).sort((a,b) => b.WINS - a.WINS)
+      }
+    });
+
+    this.gamesService.getWithFilter({ start: 0, limit: 5, result: true }).pipe(
+      tap(x => {
+        x.forEach(e => {
+          const date = new Date(e.DATE_MATCH.data[1], e.DATE_MATCH.data[2], e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
+          e.DATE_MATCH = date;
+        });
+      }),
+    ).subscribe((games) => {
+      if (games) {
+        this.results = games;
+        this.loading = false
       }
     });
   }

@@ -16,6 +16,7 @@ import { UsersAdminComponent } from './pages/administrator/users-admin/users-adm
 import { HomeComponent } from './pages/home/home.component';
 import { AuthGuard } from './core/service/auth/auth.guard';
 import { RoleGuardService } from './core/service/auth/role.guard';
+import { StatsComponent } from './pages/stats/stats.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -36,6 +37,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'history', component: BetHistoryComponent, canActivate: [AuthGuard] },
+  { path: 'stats', component: StatsComponent, canActivate: [AuthGuard] },
   {
     path: 'administrator',
     component: AdministratorComponent,

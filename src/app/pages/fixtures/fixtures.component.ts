@@ -16,6 +16,17 @@ export class FixturesComponent implements OnInit {
   page = 0
   selectedMatch = undefined
   search: string = '';
+  isExpanded = false;
+  state = 'collapsed';
+  filterForm = {
+    search: '',
+    city: '',
+    minOdds: 0,
+    maxOdds: 100,
+    d1: '2021-01-01',
+    d2: '2022-01-01',
+  }
+  filterMode = false
 
   constructor(private route: ActivatedRoute, private router: Router, private service: GamesService) { }
 
@@ -66,7 +77,49 @@ export class FixturesComponent implements OnInit {
     } else {
       this.page = this.page + 1
     }
-    this.service.getWithFilter({ upcoming: true, start: this.page * 10, search: this.search }).pipe(
+
+    if (this.filterMode) {
+      this.service.getWithFilter({ ...this.filterForm, page: this.page }).pipe(
+        tap(x => {
+          x.forEach(e => {
+            const date = new Date(e.DATE_MATCH.data[1], e.DATE_MATCH.data[2], e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
+            e.DATE_MATCH = date;
+          });
+        }),
+      ).subscribe((games) => {
+        if (games) {
+          this.loading = false
+          this.games = games;
+        }
+      }); 
+    } else {
+      this.service.getWithFilter({ upcoming: true, start: this.page * 10, search: this.search }).pipe(
+        tap(x => {
+          x.forEach(e => {
+            const date = new Date(e.DATE_MATCH.data[1], e.DATE_MATCH.data[2], e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
+            e.DATE_MATCH = date;
+          });
+        }),
+      ).subscribe((games) => {
+        if (games) {
+          this.loading = false
+          this.games = games;
+        }
+      }); 
+    }
+  }
+
+  selectMatch(id: any): any {
+    this.selectedMatch = this.games.find(e => e.ID == id)
+  }
+
+  toggleSidenav() {
+    this.isExpanded = !this.isExpanded;
+  }
+
+  filter() {
+    this.filterMode = true
+    this.service.getWithFilter({ ...this.filterForm, page: this.page }).pipe(
       tap(x => {
         x.forEach(e => {
           const date = new Date(e.DATE_MATCH.data[1], e.DATE_MATCH.data[2], e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
@@ -75,13 +128,9 @@ export class FixturesComponent implements OnInit {
       }),
     ).subscribe((games) => {
       if (games) {
-        this.loading = false
         this.games = games;
+        this.loading = false
       }
     });
-  }
-
-  selectMatch(id: any): any {
-    this.selectedMatch = this.games.find(e => e.ID == id)
   }
 }

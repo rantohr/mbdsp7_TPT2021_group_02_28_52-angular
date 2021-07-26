@@ -71,6 +71,26 @@
                         </div>
                         <!--// Widget TeamRanking \\-->
 
+                        <!--// Widget Upcoming Matches \\-->
+                        <div class="sportsmagazine-fancy-title"><h2>Matches results</h2></div>
+                        <div class="widget widget_matches">
+                            <ul>
+                                <li *ngFor="let item of results; let i = index;">
+                                    <div class="sportsmagazine-team-one">
+                                        <h6><a href="fixture-detail.html" style="pointer-events: none;">{{ item.NAME1 }}</a></h6>
+                                        <span>{{ item.ODDS_HOME }}</span>
+                                    </div>
+                                    <span>VS</span>
+                                    <div class="sportsmagazine-team-two">
+                                        <h6><a href="fixture-detail.html" style="pointer-events: none;">{{ item.NAME2 }}</a></h6>
+                                        <span>{{ item.ODDS_AWAY }}</span>
+                                    </div>
+                                    <a *ngIf="loggedUser" role="button" style="pointer-events: none;margin-top: 0" class="ticket-buy-btn">Score: {{ item.SCORE }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--// Widget Upcoming Matches \\-->
+
                     </aside>
                     <!--// SideBaar \\-->
 
