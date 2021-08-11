@@ -52,6 +52,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { BuyTokenComponent } from './shared/buy-token/buy-token.component';
 import { StatsComponent } from './pages/stats/stats.component';
 import { SidenavModule } from 'angular-ng-sidenav';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -105,7 +106,8 @@ import { SidenavModule } from 'angular-ng-sidenav';
     FormsModule,
     HttpClientModule,
     NgxPaginationModule,
-    SidenavModule
+    SidenavModule,
+    Ng2SearchPipeModule
   ],
   providers: [
     AuthService,

@@ -17,6 +17,7 @@ export class BetsAdminComponent implements OnInit {
   loading = false;
   bets = []
   p: number = 1;
+  term
 
   constructor(
     private service: ConfigsService,

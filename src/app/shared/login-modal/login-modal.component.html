@@ -7,7 +7,7 @@
             <form>
                 <input type="text" [(ngModel)]="loginBody.email" [ngModelOptions]="{standalone: true}" placeholder="Enter your email">
                 <input type="password" [(ngModel)]="loginBody.password" [ngModelOptions]="{standalone: true}" placeholder="Enter your password">
-                <a href="#" [routerLink]="['./']" fragment="" (click)="switchInterface('forget')" class="sportsmagazine-colorhover">Forget Password?</a>
+                <!-- <a href="#" [routerLink]="['./']" fragment="" (click)="switchInterface('forget')" class="sportsmagazine-colorhover">Forget Password?</a> -->
                 <div class="clearfix"></div>
                 <label><input type="submit" (click)="login()" value="Sign In" class="sportsmagazine-bordercolor sportsmagazine-color"></label>
             </form>

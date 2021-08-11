@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ErrorHandler, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/service/auth/auth.service';
 import { BetsService } from 'src/app/core/service/bets.service';
+import { ErrorMessageHandler } from 'src/app/core/service/error-message-handler.service';
 
 @Component({
   selector: 'app-buy-token',
@@ -20,7 +21,7 @@ export class BuyTokenComponent implements OnInit {
   updateMode = false
   old = undefined
 
-  constructor(private router: Router, private authService: AuthService, private betService: BetsService) { }
+  constructor(private router: Router, private errorHandler: ErrorMessageHandler, private authService: AuthService, private betService: BetsService) { }
 
   ngOnInit(): void {
     this.user = this.authService.getLoggedUserInfo()
@@ -29,19 +30,25 @@ export class BuyTokenComponent implements OnInit {
   submit(): void {
     this.loading = true
     this.error = undefined
-    if (this.form.value <= 0 || !this.user) this.error = 'invalid value'
+    if (this.form.value <= 0 || !this.user) {
+      this.error = 'invalid value'
+      this.loading = false
+      return
+    }
     this.form.id_user = this.user._id
-    
+
     this.betService.buyToken(this.form).subscribe(r => {
       if (r) {
         this.user.tokens = this.user.tokens + this.form.value
         this.authService.storeLoggedUserInfo({ user: this.user })
         this.loading = false
         this.error = 'Transaction done'
-        this.router.navigate(['/home']);  
+        setInterval(() => {
+          window.location.reload()
+        }, 1000);
       }
     }, (err) => {
-      this.error = err
+      this.error = 'invalid transaction'
       this.loading = false
     })
   }

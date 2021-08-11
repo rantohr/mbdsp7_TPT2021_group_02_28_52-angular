@@ -6,6 +6,7 @@
             <div class="normal-table-list">
                 <div class="basic-tb-hd" style="display: flex; justify-content: space-between;">
                     <h2>Users</h2>
+                    <input type="text" [(ngModel)]="term" placeholder="search 🔎">
                     <button mat-mini-fab (click)="formView = !formView">
                         <mat-icon>add</mat-icon>
                     </button>
@@ -26,7 +27,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: p }; let i = index;">
+                            <tr *ngFor="let user of users | filter:term | paginate: { itemsPerPage: 10, currentPage: p }; let i = index;">
                                 <td>{{ ((p-1)*10)+i+1 }}</td>
                                 <td>{{ user.name }}</td>
                                 <td>{{ user.email }}</td>

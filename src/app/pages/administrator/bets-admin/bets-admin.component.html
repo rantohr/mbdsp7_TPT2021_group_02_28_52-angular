@@ -41,6 +41,8 @@
                     <div class="normal-table-list">
                         <div class="basic-tb-hd" style="display: flex; justify-content: space-between;">
                             <h2>Bets</h2>
+
+                            <input type="text" [(ngModel)]="term" placeholder="search 🔎">
                         </div>
                         <div class="bsc-tbl">
                             <table class="table table-sc-ex">
@@ -56,7 +58,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr  *ngFor="let item of bets | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                                    <tr
+                                        *ngFor="let item of bets | filter:term | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                                         <td>{{ ((p-1)*10)+i+1 }}</td>
                                         <td>{{ item.username }}</td>
                                         <td>{{ item.bet }}</td>
