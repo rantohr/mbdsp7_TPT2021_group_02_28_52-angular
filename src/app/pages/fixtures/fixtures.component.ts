@@ -23,7 +23,7 @@ export class FixturesComponent implements OnInit {
     city: '',
     minOdds: 0,
     maxOdds: 100,
-    d1: '2021-01-01',
+    d1: '',
     d2: '2022-01-01',
   }
   filterMode = false
@@ -38,7 +38,7 @@ export class FixturesComponent implements OnInit {
       this.service.getWithFilter({ upcoming: true, start: this.page * 10, search: this.search }).pipe(
         tap(x => {
           x.forEach(e => {
-            const date = new Date(e.DATE_MATCH.data[1], e.DATE_MATCH.data[2], e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
+            const date = new Date(e.DATE_MATCH.data[1]+1900, e.DATE_MATCH.data[2]-1, e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
             e.DATE_MATCH = date;
           });
         }),
@@ -54,7 +54,7 @@ export class FixturesComponent implements OnInit {
     this.service.getWithFilter({ upcoming: true, start: this.page * 10, search: this.search }).pipe(
       tap(x => {
         x.forEach(e => {
-          const date = new Date(e.DATE_MATCH.data[1], e.DATE_MATCH.data[2], e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
+          const date = new Date(e.DATE_MATCH.data[1]+1900, e.DATE_MATCH.data[2]-1, e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
           e.DATE_MATCH = date;
         });
       }),
@@ -66,23 +66,19 @@ export class FixturesComponent implements OnInit {
     });
   }
 
-  toDetails(): void {
-    this.router.navigate(['/details']);
-  }
-
   paginate(type) {
     this.loading = true
-    if (type == -1 && this.page >= 1) {
+    if (type == -1 && this.page > 0) {
       this.page = this.page - 1
-    } else {
+    } else if (type == 1 && this.games.length) {
       this.page = this.page + 1
     }
 
     if (this.filterMode) {
-      this.service.getWithFilter({ ...this.filterForm, page: this.page }).pipe(
+      this.service.getWithFilter({ upcoming: true, ...this.filterForm, page: this.page }).pipe(
         tap(x => {
           x.forEach(e => {
-            const date = new Date(e.DATE_MATCH.data[1], e.DATE_MATCH.data[2], e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
+            const date = new Date(e.DATE_MATCH.data[1]+1900, e.DATE_MATCH.data[2]-1, e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
             e.DATE_MATCH = date;
           });
         }),
@@ -96,7 +92,7 @@ export class FixturesComponent implements OnInit {
       this.service.getWithFilter({ upcoming: true, start: this.page * 10, search: this.search }).pipe(
         tap(x => {
           x.forEach(e => {
-            const date = new Date(e.DATE_MATCH.data[1], e.DATE_MATCH.data[2], e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
+            const date = new Date(e.DATE_MATCH.data[1]+1900, e.DATE_MATCH.data[2]-1, e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
             e.DATE_MATCH = date;
           });
         }),
@@ -119,10 +115,11 @@ export class FixturesComponent implements OnInit {
 
   filter() {
     this.filterMode = true
-    this.service.getWithFilter({ ...this.filterForm, page: this.page }).pipe(
+    this.page = 0
+    this.service.getWithFilter({ ...this.filterForm, upcoming: true, page: this.page }).pipe(
       tap(x => {
         x.forEach(e => {
-          const date = new Date(e.DATE_MATCH.data[1], e.DATE_MATCH.data[2], e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
+          const date = new Date(e.DATE_MATCH.data[1]+1900, e.DATE_MATCH.data[2]-1, e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
           e.DATE_MATCH = date;
         });
       }),

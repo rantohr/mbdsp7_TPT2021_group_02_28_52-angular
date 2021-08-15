@@ -83,7 +83,7 @@ export class BetModalComponent implements OnInit, OnChanges {
       }
     }
   }
-  
+
   submit(): void {
     this.loading = true
     this.error = undefined
@@ -93,11 +93,16 @@ export class BetModalComponent implements OnInit, OnChanges {
       return
     }
     this.form.odds = this.match.ODDS_DRAW
-    if (this.form.id_team == this.match.ID1) this.form.odds = this.match.ODDS_HOME
+    if (this.form.id_team == "draw") {
+      this.form.id_team = null
+      this.form.odds = this.match.ODDS_DRAW
+    }
+    else if (this.form.id_team == this.match.ID1) this.form.odds = this.match.ODDS_HOME
     else if (this.form.id_team == this.match.ID2) this.form.odds = this.match.ODDS_AWAY
     this.form.id_gambler = this.user._id
     this.form.username = this.user.username
     this.form.email = this.user.email
+    this.form.username = this.user.name
     this.form.id_game = this.match.ID
 
     if (this.updateMode) {

@@ -29,7 +29,8 @@ export class MatchesAdminComponent implements OnInit {
     this.service.getWithFilter({ limit: 20000 }).pipe(
       tap(x => {
         x.forEach(e => {
-          const date = new Date(e.DATE_MATCH.data[1], e.DATE_MATCH.data[2], e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
+          const date = new Date(e.DATE_MATCH.data[1]+1900, e.DATE_MATCH.data[2]-1, e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
+          
           e.DATE_MATCH = date;
         });
       }),
@@ -66,7 +67,7 @@ export class MatchesAdminComponent implements OnInit {
               this.service.getWithFilter({ limit: 20000 }).pipe(
                 tap(x => {
                   x.forEach(e => {
-                    const date = new Date(e.DATE_MATCH.data[1], e.DATE_MATCH.data[2], e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
+                    const date = new Date(e.DATE_MATCH.data[1]+1900, e.DATE_MATCH.data[2]-1, e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
                     e.DATE_MATCH = date;
                   });
                 }),
@@ -118,7 +119,7 @@ export class MatchesAdminComponent implements OnInit {
               this.service.getWithFilter({ limit: 20000 }).pipe(
                 tap(x => {
                   x.forEach(e => {
-                    const date = new Date(e.DATE_MATCH.data[1], e.DATE_MATCH.data[2], e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
+                    const date = new Date(e.DATE_MATCH.data[1]+1900, e.DATE_MATCH.data[2]-1, e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
                     e.DATE_MATCH = date;
                   });
                 }),
@@ -153,7 +154,7 @@ export class MatchesAdminComponent implements OnInit {
               this.service.getWithFilter({ limit: 20000 }).pipe(
                 tap(x => {
                   x.forEach(e => {
-                    const date = new Date(e.DATE_MATCH.data[1], e.DATE_MATCH.data[2], e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
+                    const date = new Date(e.DATE_MATCH.data[1]+1900, e.DATE_MATCH.data[2]-1, e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
                     e.DATE_MATCH = date;
                   });
                 }),

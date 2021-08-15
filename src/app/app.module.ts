@@ -53,6 +53,7 @@ import { BuyTokenComponent } from './shared/buy-token/buy-token.component';
 import { StatsComponent } from './pages/stats/stats.component';
 import { SidenavModule } from 'angular-ng-sidenav';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NotifModalComponent } from './shared/notif-modal/notif-modal.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     UserProfilModalComponent,
     BuyTokenComponent,
     StatsComponent,
+    NotifModalComponent,
   ],
   imports: [
     BrowserModule,

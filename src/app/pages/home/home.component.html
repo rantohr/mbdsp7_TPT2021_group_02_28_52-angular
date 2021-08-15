@@ -12,6 +12,7 @@
                     <div class="col-md-8">
                         <div class="sportsmagazine-blog sportsmagazine-bloglarge">
                             <ul class="row">
+                                <app-loader *ngIf="loadingMain"></app-loader>
                                 <li class="col-md-12" *ngFor="let item of news">
                                     <figure><img [src]="item.image" alt=""></figure>
                                     <div class="sportsmagazine-bloglarge-text">
@@ -32,6 +33,7 @@
                         <div class="sportsmagazine-fancy-title"><h2>Upcoming matches</h2></div>
                         <div class="widget widget_matches">
                             <ul>
+                                <app-loader *ngIf="loadingUpc"></app-loader>
                                 <li *ngFor="let item of upcoming; let i = index;">
                                     <div class="sportsmagazine-team-one">
                                         <h6><a href="fixture-detail.html" style="pointer-events: none;">{{ item.NAME1 }}</a></h6>
@@ -51,6 +53,7 @@
                         <!--// Widget TeamRanking \\-->
                         <div class="widget widget_team_ranking">
                             <div class="sportsmagazine-fancy-title"><h2>Team Rankings</h2></div>
+                            <app-loader *ngIf="loadingRank"></app-loader>
                             <div class="ranking-title-table">
                                 <ul class="ranking-title-row">
                                     <li>Team Rank</li>
@@ -74,6 +77,7 @@
                         <!--// Widget Upcoming Matches \\-->
                         <div class="sportsmagazine-fancy-title"><h2>Matches results</h2></div>
                         <div class="widget widget_matches">
+                            <app-loader *ngIf="loadingRes"></app-loader>
                             <ul>
                                 <li *ngFor="let item of results; let i = index;">
                                     <div class="sportsmagazine-team-one">
@@ -121,5 +125,3 @@
 <app-bet-modal [match]="selectedMatch"></app-bet-modal>
 
 <app-buy-token></app-buy-token>
-
-<app-loader *ngIf="loading"></app-loader>

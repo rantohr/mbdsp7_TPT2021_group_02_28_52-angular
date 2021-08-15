@@ -31,6 +31,7 @@
                     [ngModelOptions]="{standalone: true}">
                     <option [value]="match?.ID1">{{ match?.NAME1 }}</option>
                     <option [value]="match?.ID2">{{ match?.NAME2 }}</option>
+                    <option>draw</option>
                 </select>
                 <input type="number" [(ngModel)]="form.bet" [ngModelOptions]="{standalone: true}"
                     placeholder="Enter amount">

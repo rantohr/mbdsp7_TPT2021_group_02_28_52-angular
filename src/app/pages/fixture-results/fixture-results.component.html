@@ -14,67 +14,86 @@
         </div>
     </div>
     <!--// SubHeader \\-->
-<!--// Main Section \\-->
-<div class="sportsmagazine-main-section sportsmagazine-modren-fixturefull">
-    <div class="container">
-        <div class="row">
+    <!--// Main Section \\-->
+    <div class="sportsmagazine-main-section sportsmagazine-modren-fixturefull">
+        <div class="container">
+            <div class="row">
 
-            <div class="col-md-12">
-                <div class="sportsmagazine-fixture sportsmagazine-modren-fixture">
-                    <ul class="row">
-                        <li class="col-md-6" *ngFor="let item of games; let i = index;">
-                            <div class="sportsmagazine-modren-fixture-wrap">
-                                <div class="sportsmagazine-modren-fixture-text">
-                                    <div class="sportsmagazine-modren-team-one">
-                                        <figure style="margin-top: -20%"><img
-                                                [src]="item.LOGO1" alt="">
-                                        </figure>
-                                        <section>
-                                            <h6>{{ item.NAME1 }}</h6>
-                                            <span style="font-size: xxx-large; margin-top: 10%;">{{ item.SCORE.split('-')[0] }}</span>
-                                        </section>
-                                        <span></span>
-                                    </div>
-                                    <div class="sportsmagazine-modren-match-text">
-                                        <h5>Result Match</h5>
-                                        <time datetime="2008-02-14 20:00">{{ item.DATE_MATCH | date: 'd-MMM-yy HH:mm' }}</time>
-                                        <div class="clearfix"></div>
-                                        <span>VS</span>
-                                        <h6>{{ item.STADIUM }}</h6>
+                <div style="display: flex; justify-content: space-around;">
+                    <label for="">Search: </label>
+                    <input type="text" placeholder="teams" [(ngModel)]="filterForm.search"
+                        [ngModelOptions]="{standalone: true}">
+                    <label for="">Dates: </label>
+                    <input type="date" placeholder="date min" [(ngModel)]="filterForm.d1"
+                        [ngModelOptions]="{standalone: true}">
+                    <label for="">to</label>
+                    <input type="date" placeholder="date max" [(ngModel)]="filterForm.d2"
+                        [ngModelOptions]="{standalone: true}">
+                    <div style="height: 1em;"></div>
+                    <label>
+                        <input type="submit" (click)="filter()" value="Submit"
+                            class="sportsmagazine-bordercolor sportsmagazine-color"
+                            style="background-color: black; width: 5em; height: 3em;"></label>
+                </div>
 
-                                    </div>
-                                    <div class="sportsmagazine-modren-team-two">
-                                        <figure style="margin-top: -20%"><img
-                                            [src]="item.LOGO2" alt="">
-                                        </figure>
-                                        <section>
-                                            <h6>{{ item.NAME2 }}</h6>
-                                            <span style="font-size: xxx-large; margin-top: 10%;">0</span>
-                                        </section>
-                                        <span></span>
+                <div class="col-md-12">
+                    <div class="sportsmagazine-fixture sportsmagazine-modren-fixture">
+                        <ul class="row">
+                            <li class="col-md-6" *ngFor="let item of games; let i = index;">
+                                <div class="sportsmagazine-modren-fixture-wrap">
+                                    <div class="sportsmagazine-modren-fixture-text">
+                                        <div class="sportsmagazine-modren-team-one">
+                                            <figure style="margin-top: -20%"><img [src]="item.LOGO1" alt="">
+                                            </figure>
+                                            <section>
+                                                <h6>{{ item.NAME1 }}</h6>
+                                                <span style="font-size: xxx-large; margin-top: 10%;">{{
+                                                    item.SCORE.split('-')[0] }}</span>
+                                            </section>
+                                            <span></span>
+                                        </div>
+                                        <div class="sportsmagazine-modren-match-text">
+                                            <h5>Result Match</h5>
+                                            <time datetime="2008-02-14 20:00">{{ item.DATE_MATCH | date: 'd-MMM-yy
+                                                HH:mm' }}</time>
+                                            <div class="clearfix"></div>
+                                            <span>VS</span>
+                                            <h6>{{ item.STADIUM }}</h6>
+
+                                        </div>
+                                        <div class="sportsmagazine-modren-team-two">
+                                            <figure style="margin-top: -20%"><img [src]="item.LOGO2" alt="">
+                                            </figure>
+                                            <section>
+                                                <h6>{{ item.NAME2 }}</h6>
+                                                <span style="font-size: xxx-large; margin-top: 10%;">0</span>
+                                            </section>
+                                            <span></span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--// Pagination \\-->
+                    <div class="sportsmagazine-pagination">
+                        <ul class="page-numbers">
+                            <li><button class="previous page-numbers" (click)="paginate(-1)"><span aria-label="Next"><i
+                                            class="fa fa-angle-left"></i></span> Prev </button>
+                            </li>
+                            <li><button class="next page-numbers" (click)="paginate(1)"><span aria-label="Next"> Next <i
+                                            class="fa fa-angle-right"></i></span></button>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--// Pagination \\-->
                 </div>
-                <!--// Pagination \\-->
-                <div class="sportsmagazine-pagination">
-                    <ul class="page-numbers">
-                        <li><button class="previous page-numbers" (click)="paginate(1)"><span
-                                    aria-label="Next"><i class="fa fa-angle-left"></i></span></button></li>
-                        <li><button class="next page-numbers" (click)="paginate(-1)"><span aria-label="Next"><i
-                                        class="fa fa-angle-right"></i></span></button></li>
-                    </ul>
-                </div>
-                <!--// Pagination \\-->
+
+
             </div>
-
-
         </div>
     </div>
-</div>
-<!--// Main Section \\-->
+    <!--// Main Section \\-->
 
     <app-front-footer></app-front-footer>
 
