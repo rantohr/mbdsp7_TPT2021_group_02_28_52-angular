@@ -16,6 +16,10 @@ export class GamesService {
     return this.http.get(`${this.uri}`, { params });
   }
 
+  simulateResult(body?: any): Observable<any> {
+    return this.http.post(`${this.nodeUri}/getResult`, body);
+  }
+
   getTeams(params?: any): Observable<any> {
     return this.http.get(`${environment.JAVA_SERVER_URL}/api/teams`, { params });
   }

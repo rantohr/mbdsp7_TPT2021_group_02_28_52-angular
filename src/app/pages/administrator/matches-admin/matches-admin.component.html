@@ -51,6 +51,9 @@
                                     <button mat-mini-fab style="transform: scale(0.7);" (click)="warningDialog(item)">
                                         <mat-icon>delete</mat-icon>
                                     </button>
+                                    <button *ngIf="!item.SCORE" mat-mini-fab style="transform: scale(0.7);" (click)="simulate(item)">
+                                        <mat-icon>check</mat-icon>
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>

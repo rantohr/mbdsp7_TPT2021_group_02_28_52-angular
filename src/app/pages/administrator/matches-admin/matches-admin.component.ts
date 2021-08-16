@@ -177,4 +177,43 @@ export class MatchesAdminComponent implements OnInit {
     }
     this.selectedItem = undefined;
   }
+
+  simulate(item): void {
+    this.loading = true;
+    this.service.simulateResult({gameId: item.ID}).subscribe(
+      (res) => {
+        if (res) {
+          this.loading = false;
+          Swal.fire({
+            position: 'bottom',
+            icon: 'success',
+            title: 'game finished successfully',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          this.service.getWithFilter({ limit: 20000 }).pipe(
+            tap(x => {
+              x.forEach(e => {
+                const date = new Date(e.DATE_MATCH.data[1]+1900, e.DATE_MATCH.data[2]-1, e.DATE_MATCH.data[3], e.DATE_MATCH.data[4])
+                e.DATE_MATCH = date;
+              });
+            }),
+          ).subscribe((games) => {
+            if (games) this.games = games;
+            this.loading = false;
+          });
+        }
+      },
+      (err) => {
+        this.loading = false;
+        Swal.fire({
+          position: 'bottom',
+          icon: 'error',
+          title: this.errorMessageHandler.getSingleErrorMessage(err),
+          showConfirmButton: false,
+          timer: 3000,
+        });
+      }
+    )
+  }
 }

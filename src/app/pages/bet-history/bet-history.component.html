@@ -33,6 +33,7 @@
                                     <th>Quote</th>
                                     <th>Team 2</th>
                                     <th>Quote</th>
+                                    <th>Quote draw</th>
                                     <th>Match Result</th>
                                     <th>Your bet</th>
                                     <th>Bet Result</th>
@@ -53,6 +54,7 @@
                                         </div>
                                     </td>
                                     <td>x{{ item.ODDS_AWAY }}</td>
+                                    <td>x{{ item.ODDS_DRAW }}</td>
                                     <td>{{ item.SCORE }}</td>
                                     <td>{{ item.BET }}</td>
                                     <td *ngIf="!item.SCORE"><h6 class="bet-win" style="background-color: #ffeb3b;">waiting for results</h6></td>
