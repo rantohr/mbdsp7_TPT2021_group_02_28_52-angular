@@ -34,7 +34,7 @@
                                 <td>{{ user.birthDate | date }}</td>
                                 <td>{{ user.gender=='m' ? '♂️' : '♀' }}</td>
                                 <td>{{ user.money }}</td>
-                                <td>{{ user.tokens }}</td>
+                                <td>{{ user.tokens.toFixed(2) }}</td>
                                 <td>
                                     <img [src]="user.image || 'assets/image/notexist.jpg'" alt="profil"
                                         style="width: 5em; height: 5em; object-fit: cover;">

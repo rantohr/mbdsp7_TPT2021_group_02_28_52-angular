@@ -5,7 +5,7 @@
     <div style="display: flex; justify-content: space-between;">
         <app-card-dashboard [data]="countG"></app-card-dashboard>
         <app-card-dashboard [data]="countB"></app-card-dashboard>
-        <app-card-dashboard [data]="profit"></app-card-dashboard>
+        <app-card-dashboard [data]="profit.toFixed(2)"></app-card-dashboard>
         <app-card-dashboard [data]="moneyInGame"></app-card-dashboard>
     </div>
 
