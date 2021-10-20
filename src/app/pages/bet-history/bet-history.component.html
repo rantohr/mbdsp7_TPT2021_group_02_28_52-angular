@@ -58,8 +58,8 @@
                                     <td>{{ item.SCORE }}</td>
                                     <td>{{ item.BET }}</td>
                                     <td *ngIf="!item.SCORE"><h6 class="bet-win" style="background-color: #ffeb3b;">waiting for results</h6></td>
-                                    <td *ngIf="item.SCORE && item.TOTAL >= 0"><h6 class="bet-win">Win: {{ item.TOTAL.toFixed(2) }}$</h6></td>
-                                    <td *ngIf="item.SCORE && item.TOTAL < 0"><h6 class="bet-loss">Loss: {{ item.TOTAL.toFixed(2) }}$</h6></td>
+                                    <td *ngIf="item.SCORE && item.TOTAL >= 0"><h6 class="bet-win">Win: {{ item.TOTAL?.toFixed(2) }}$</h6></td>
+                                    <td *ngIf="item.SCORE && item.TOTAL < 0"><h6 class="bet-loss">Loss: {{ item.TOTAL?.toFixed(2) }}$</h6></td>
                                 </tr>
                             </table>
                         </div>

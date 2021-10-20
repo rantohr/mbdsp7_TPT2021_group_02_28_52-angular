@@ -5,7 +5,7 @@
     <div style="display: flex; justify-content: space-between;">
         <app-card-dashboard [data]="countG"></app-card-dashboard>
         <app-card-dashboard [data]="countB"></app-card-dashboard>
-        <app-card-dashboard [data]="profit.toFixed(2)"></app-card-dashboard>
+        <app-card-dashboard [data]="profit"></app-card-dashboard>
         <app-card-dashboard [data]="moneyInGame"></app-card-dashboard>
     </div>
 
@@ -36,7 +36,7 @@
                         <tr *ngFor="let item of richestGamblers; let i = index;">
                             <td>{{ item.name }}</td>
                             <td class="text-right">
-                                <h4>{{ item.money.toFixed(2) }}$</h4>
+                                <h4>{{ item.money?.toFixed(2) }}$</h4>
                             </td>
                         </tr>
                     </tbody>
@@ -59,7 +59,7 @@
                         <tr *ngFor="let item of profitPerUser; let i = index;">
                             <td>{{ item.USERNAME }}</td>
                             <td class="text-right">
-                                <h4>{{ item.TOTAL_MONEY.toFixed(2) }}$</h4>
+                                <h4>{{ item.TOTAL_MONEY?.toFixed(2) }}$</h4>
                             </td>
                         </tr>
                     </tbody>

@@ -64,7 +64,7 @@
                                         <td>{{ item.username }}</td>
                                         <td>{{ item.bet }}</td>
                                         <td>{{ item.games.home.name }} vs {{ item.games.away.name }}</td>
-                                        <td>{{ item.total.toFixed(2) }}</td>
+                                        <td>{{ item.total?.toFixed(2) }}</td>
                                         <td>{{ item.createdAt | date:'yyyy-MM-dd' }}</td>
                                         <td>{{ item.lastUpdate | date:'yyyy-MM-dd' }}</td>
                                     </tr>

@@ -33,8 +33,8 @@ export class ChartsAdminComponent implements OnInit {
     })
     this.service.profitForWebsite().subscribe(res => {
       if (res) {
-        this.profit = { title: 'Total Profit', value: res.profit + "$" }
-        this.moneyInGame = { title: 'Money In Games', value: res.moneyInGame + "$" }
+        this.profit = { title: 'Total Profit', value: res.profit?.toFixed(2) + "$" }
+        this.moneyInGame = { title: 'Money In Games', value: res.moneyInGame?.toFixed(2) + "$" }
       }
     })
     this.service.gamesPerMonth().subscribe(res => {

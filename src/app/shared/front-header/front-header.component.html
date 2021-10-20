@@ -25,7 +25,7 @@
                 <aside class="col-md-8">
                     <ul class="sportsmagazine-user-section">
                         <li *ngIf="loggedUser"><i class="fa fa-dollar"></i> <a>Tokens : {{ loggedUser.tokens ?
-                                loggedUser.tokens.toFixed(2) : '0' }}</a></li>
+                                loggedUser.tokens?.toFixed(2) : '0' }}</a></li>
                         <li *ngIf="!loggedUser"><i class="fa fa-user"></i> <a id="loginBtn" href="#" data-toggle="modal"
                                 data-target="#loginModal">Login</a></li>
                         <li *ngIf="loggedUser"><i class="fa fa-sign-in"></i> <a href="#" (click)="signout()">Sign

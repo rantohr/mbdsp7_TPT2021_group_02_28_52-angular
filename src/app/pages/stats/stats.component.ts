@@ -42,7 +42,7 @@ export class StatsComponent implements OnInit {
       if (res) {
         this.loss = res.filter(e => e.TOTAL < 0)
         this.wins = res.filter(e => e.TOTAL > 0)
-        this.profit = { title: 'Your Profit', value: this.wins[0].TOTAL.toFixed(2) }
+        this.profit = { title: 'Your Profit', value: this.wins[0].TOTAL?.toFixed(2) }
       }
     });
   }
